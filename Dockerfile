@@ -12,6 +12,6 @@ COPY test_methods.py .
 
 ENV fprocess="python test_methods.py"
 
-HEALTHCHECK --intervals=1s CMD [ -e /tmp/.lock ] || exit 1
+HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
 
 CMD ["fwatchdog"]
