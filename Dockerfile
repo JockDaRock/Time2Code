@@ -8,7 +8,7 @@ RUN chmod +x /usr/bin/fwatchdog
 
 WORKDIR /root/
 
-COPY test_methods.py
+COPY test_methods.py .
 
 ENV fprocess="python test_methods.py"
 
