@@ -8,9 +8,9 @@ RUN chmod +x /usr/bin/fwatchdog
 
 WORKDIR /root/
 
-COPY test_methods.py .
+COPY time2py.py .
 
-ENV fprocess="python test_methods.py"
+ENV fprocess="python time2py.py"
 
 HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
 
