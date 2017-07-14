@@ -84,12 +84,35 @@
 
 
       $(document).ready(function(){
+            var jqconsole = $('#console').jqconsole('>>>\n');
             $("button").click(function(){
-                $.post("http://pwd10-0-19-3-8080.host1.labs.play-with-docker.com/function/test2code",
-                "print('hey')",
-                crossDomain: true,
-                function(data,status){
-                    alert("Data: " + data + "\nStatus: " + status);
+                jqconsole.Reset();
+                var IDE = ace.edit("IDE");
+                var code = IDE.getValue();
+                console.log(code)
+                $.ajax({
+                    url: "/code/py",
+                    type: 'post',
+                    dataType: 'text',
+                    headers: {'Content-Type': 'text/plain'},
+                    // data: "print('hey')",
+                    data: code,
+                    success: function (data) {
+                        console.log(data);
+                        $(function () {
+                            var writePrompt = function () {
+                                jqconsole.Prompt(false);
+                                jqconsole.Write(data + '\n', 'jqconsole-output');
+                              // Start the prompt with history enabled.
+                              // jqconsole.Prompt(false, function (input) {
+                                // Output input with the class jqconsole-output.
+                                //jqconsole.Write(input + '\n', 'jqconsole-output');
+                                // Restart the prompt.
+                                //startPrompt();
+                              };
+                            writePrompt();
+                        });
+                    },
                 });
             });
         });

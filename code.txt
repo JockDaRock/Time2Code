@@ -1,38 +1,13 @@
 import requests
+import json
 
-r = requests.get("http://httpbin.org/get")
+url = "https://sandboxapicem.cisco.com/api/v1/ticket"
 
-print(r)
+payload = {"username": "devnetuser", "password": "Cisco123!"}
+data = json.dumps(payload)
+print(data)
+headers = {"content-type": "application/json"}
 
-http.open("POST", url, true);
-        http.setRequestHeader("Content-type", "text/plain");
-        http.setRequestHeader("Access-Control-Allow-Origin", "true");
-        http.onloadend = function() {
-            if(http.status == 200) {
-                // alert(http.responseText);
-                text = "";
-                text += http.responseText;
-                var jqconsole = $('#console').jqconsole(text);
-                jqconsole.Write(text, 'jqconsole-output');
-            } else {
-                text = "";
-                text += http.responseText;
-                var jqconsole = $('#console').jqconsole(text);
-                jqconsole.Write(text, 'jqconsole-output');
-            }
-        };
-        http.send(data);
+response = requests.post(url, data=data, headers=headers, verify=False)
 
-      $(function () {
-        var jqconsole = $('#console').jqconsole('Hi\n', '>>>');
-        var startPrompt = function () {
-          // Start the prompt with history enabled.
-          jqconsole.Prompt(false, function (input) {
-            // Output input with the class jqconsole-output.
-            jqconsole.Write(input + '\n', 'jqconsole-output');
-            // Restart the prompt.
-            startPrompt();
-          });
-        };
-        startPrompt();
-      });
+print(response.text)

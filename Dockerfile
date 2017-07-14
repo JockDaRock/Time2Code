@@ -1,6 +1,6 @@
 FROM python:alpine
 
-RUN pip3 install requests
+RUN apk update && apk add ca-certificates && pip3 install requests certifi
 
 ADD https://github.com/alexellis/faas/releases/download/0.5.1-alpha/fwatchdog /usr/bin
 

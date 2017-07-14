@@ -1,5 +1,3 @@
-"""import time
-from flask import Flask, request"""
 import sys
 import os
 from io import StringIO
@@ -23,9 +21,12 @@ def get_stdin():
     return buf
 
 
-if(__name__ == "__main__"):
+if __name__ == "__main__":
     st = get_stdin()
     # print(st)
     with stdoutIO() as s:
-        exec(st)
+        try:
+            exec(st)
+        except BaseException as e:
+            print(e)
     print(s.getvalue())
