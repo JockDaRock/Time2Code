@@ -12,12 +12,12 @@ RUN chmod +x /usr/bin/fwatchdog
 WORKDIR /root/
 
 COPY ide.py .
-COPY templates .
+COPY templates ./templates
 
 ENV fprocess="python3 ide.py"
 
 HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
 
-EXPOSE 80
+EXPOSE 5000
 
 CMD ["fwatchdog"]
