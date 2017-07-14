@@ -5,9 +5,9 @@ RUN apk add -Uuv --no-cache python3 \
     && apk add ca-certificates && pip3 install --no-cache-dir --upgrade pip setuptools wheel \
     && pip3 install requests certifi flask
 
-ADD https://github.com/alexellis/faas/releases/download/0.5.1-alpha/fwatchdog /usr/bin
+# ADD https://github.com/alexellis/faas/releases/download/0.5.1-alpha/fwatchdog /usr/bin
 
-RUN chmod +x /usr/bin/fwatchdog
+# RUN chmod +x /usr/bin/fwatchdog
 
 WORKDIR /root/
 
@@ -20,4 +20,4 @@ HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
 
 EXPOSE 5000
 
-CMD ["fwatchdog"]
+CMD ["python3", "./ide.py"]
