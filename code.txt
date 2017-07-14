@@ -3,3 +3,36 @@ import requests
 r = requests.get("http://httpbin.org/get")
 
 print(r)
+
+http.open("POST", url, true);
+        http.setRequestHeader("Content-type", "text/plain");
+        http.setRequestHeader("Access-Control-Allow-Origin", "true");
+        http.onloadend = function() {
+            if(http.status == 200) {
+                // alert(http.responseText);
+                text = "";
+                text += http.responseText;
+                var jqconsole = $('#console').jqconsole(text);
+                jqconsole.Write(text, 'jqconsole-output');
+            } else {
+                text = "";
+                text += http.responseText;
+                var jqconsole = $('#console').jqconsole(text);
+                jqconsole.Write(text, 'jqconsole-output');
+            }
+        };
+        http.send(data);
+
+      $(function () {
+        var jqconsole = $('#console').jqconsole('Hi\n', '>>>');
+        var startPrompt = function () {
+          // Start the prompt with history enabled.
+          jqconsole.Prompt(false, function (input) {
+            // Output input with the class jqconsole-output.
+            jqconsole.Write(input + '\n', 'jqconsole-output');
+            // Restart the prompt.
+            startPrompt();
+          });
+        };
+        startPrompt();
+      });
