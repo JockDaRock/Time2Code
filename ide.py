@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/time2code')
 @app.route('/time2code/<name>')
-def time2code(name='base'):
+def time2code(name='time2py'):
     return render_template('base_test.html', name=name)
 
 
@@ -14,7 +14,8 @@ def time2code(name='base'):
 def time2py():
     if request.method == 'POST':
         data = request.data
-        url = "http://pwd10-0-61-3-8080.host1.labs.play-with-docker.com/function/time2code"
+        host = request.host
+        url = "http://%s/function/time2py" % host
         headers = {"Content-Type": "text/plain"}
 
         code_exec = requests.post(url, data=data, headers=headers)
@@ -26,5 +27,5 @@ def time2py():
         return resp
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8181)
+    app.run(host="0.0.0.0", port=80)
 
