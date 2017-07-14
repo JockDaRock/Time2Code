@@ -13,7 +13,7 @@ WORKDIR /root/
 
 COPY time2py.py .
 
-ENV fprocess="python time2py.py"
+ENV fprocess="python3 time2py.py"
 
 HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
 
