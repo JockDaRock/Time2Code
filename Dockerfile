@@ -18,4 +18,6 @@ ENV fprocess="python3 ide.py"
 
 HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
 
+EXPOSE 80
+
 CMD ["fwatchdog"]
