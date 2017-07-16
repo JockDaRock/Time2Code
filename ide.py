@@ -5,6 +5,11 @@ from wsgiref.handlers import CGIHandler
 app = Flask(__name__)
 
 
+@app.route('/')
+def hello():
+    return "Hello World!!!"
+
+
 @app.route('/time2code')
 @app.route('/time2code/<name>')
 def time2code(name='time2py'):
