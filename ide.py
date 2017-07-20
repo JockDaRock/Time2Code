@@ -6,18 +6,19 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
-    return "Hello World!!!"
+@app.route('/<code_exec>')
+def time2py():
+    code_exec = request.args.get('time2code')
+    return render_template('base_test.html', code_exec="time2py")
 
 
-@app.route('/time2code')
-@app.route('/time2code/<name>')
-def time2code(name='time2py'):
-    return render_template('base_test.html', name=name)
+@app.route('/time2go')
+def time2go():
+    return render_template('base_test.html', code_exec="time2go")
 
 
 @app.route('/code/py', methods=['POST'])
-def time2py():
+def codepy():
     if request.method == 'POST':
         data = request.data
         host = request.host
@@ -43,7 +44,7 @@ class ProxyFix(object):
         environ['REQUEST_METHOD'] = "GET"
         environ['SCRIPT_NAME'] = ""
         environ['PATH_INFO'] = "/"
-        environ['QUERY_STRING'] = ""
+        environ['QUERY_STRING'] = "time2code=time2go"
         environ['SERVER_PROTOCOL'] = "HTTP/1.1"
         return self.app(environ, start_response)
 

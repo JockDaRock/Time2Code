@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base Test Une</title>
+    <script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+    <link href="http://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div id="myWrapper">
+      <form class="form">
+        <div class="form-group">
+          <label for="mode" class="control-label">Language Mode:</label>
+          <select id="mode" class="form-control">
+            <option>python</option>
+            <option>json</option>
+            <option>golang</option>
+          </select>
+        </div>
+      </form>
+      <div id="myEditor"></div>
+    </div>
+    <script>
+        YUI().use(
+          'aui-ace-autocomplete-base',
+          function(Y) {
+            var editor = new Y.AceEditor(
+              {
+                boundingBox: '#myEditor',
+                height: '200',
+                mode: 'python',
+                value: 'print("Hello there!!!")',
+                width: '700',
+                theme: 'chaos'
+              }
+            ).render();
+            editor.ace.config.set('themPath
+
+            var mode = Y.one('#mode');
+
+            if (mode) {
+              var contents = {
+                python: 'print("Hello there!!!")',
+                golang: 'package main\r\n\r\nimport "fmt"\r\n\r\nfunc main(){\r\n\r\t\r\t}',
+                json: '{"value": "Write something here..."}'
+              };
+
+              var currentMode = 'python';
+
+              var updateValue = function() {
+                editor.set('value', contents[currentMode]);
+              };
+
+              mode.on(
+                'change',
+                function(event) {
+                  currentMode = this.val();
+                  editor.set('mode', currentMode);
+                  updateValue();
+                }
+              );
+            }
+          }
+        );
+    </script>
+
+</body>
+</html>
