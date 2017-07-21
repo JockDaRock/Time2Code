@@ -6,24 +6,14 @@ import markdown
 app = Flask(__name__)
 
 
-@app.route('/time2py')
-def time2py():
-    return render_template('base_test_server.html', code_exec="time2py")
-
-
-@app.route('/time2go')
-def time2go():
-    return render_template('base_test_server.html', code_exec="time2go")
-
-
 @app.route('/')
 def time2code():
-    url = "https://raw.githubusercontent.com/joyent/triton/master/README.md"
+    url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
     r = requests.get(url)
     mark = r.text
 
     content = Markup(markdown.markdown(mark))
-    return render_template('index.html', markd=content)
+    return render_template('index-panel.html', markd=content)
 
 
 @app.route('/code/python', methods=['POST'])
@@ -61,7 +51,7 @@ def codego():
 
         resp = code_exec.text
 
-        # print(resp)
+        # print(repr(resp))
 
         return resp
 

@@ -1,37 +1,20 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, Markup
 import requests
+from urllib.parse import urlparse
+import markdown
 from wsgiref.handlers import CGIHandler
 
 app = Flask(__name__)
 
 
 @app.route('/')
-@app.route('/<code_exec>')
-def time2py():
-    code_exec = request.args.get('time2code')
-    return render_template('base_test.html', code_exec="time2py")
+def time2code():
+    url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
+    r = requests.get(url)
+    mark = r.text
 
-
-@app.route('/time2go')
-def time2go():
-    return render_template('base_test.html', code_exec="time2go")
-
-
-@app.route('/code/py', methods=['POST'])
-def codepy():
-    if request.method == 'POST':
-        data = request.data
-        host = request.host
-        url = "http://%s/function/time2py" % host
-        headers = {"Content-Type": "text/plain"}
-
-        code_exec = requests.post(url, data=data, headers=headers)
-
-        resp = code_exec.text
-
-        # print(resp)
-
-        return resp
+    content = Markup(markdown.markdown(mark))
+    return render_template('index-panel.html', markd=content)
 
 
 class ProxyFix(object):
@@ -44,7 +27,7 @@ class ProxyFix(object):
         environ['REQUEST_METHOD'] = "GET"
         environ['SCRIPT_NAME'] = ""
         environ['PATH_INFO'] = "/"
-        environ['QUERY_STRING'] = "time2code=time2go"
+        environ['QUERY_STRING'] = ""
         environ['SERVER_PROTOCOL'] = "HTTP/1.1"
         return self.app(environ, start_response)
 
