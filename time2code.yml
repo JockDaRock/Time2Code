@@ -1,0 +1,22 @@
+provider:
+  name: faas
+  gateway: http://localhost:8080
+  network: "func_functions" # this is optional and defaults to func_functions
+
+functions:
+  python:
+    lang: python
+    image: jockdarock/time2go:latest
+
+  golang:
+    lang: golang
+    image: jockdarock/time2go:latest
+
+  powershell:
+    lang: powershell
+    image: jockdarock/time2powershell:latest
+
+  time2code:
+    lang: powershell
+    handler:
+    image: jockdarock/time2code:latest
