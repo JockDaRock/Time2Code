@@ -1,0 +1,93 @@
+version: "3"
+services:
+# Setup FaaS Framework First
+# Core API services for FaaS are pinned, HA is provided for functions.
+    gateway:
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+        ports:
+            - 8080:8080
+        image: functions/gateway:latest
+        networks:
+            - functions
+        environment:
+            dnsrr: "true"  # Temporarily use dnsrr in place of VIP while issue persists on PWD
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+    prometheus:
+        image: functions/prometheus:latest  # autobuild from Dockerfile in repo.
+        command: "-config.file=/etc/prometheus/prometheus.yml -storage.local.path=/prometheus -storage.local.memory-chunks=10000 --alertmanager.url=http://alertmanager:9093"
+        ports:
+            - 9090:9090
+        depends_on:
+            - gateway
+            - alertmanager
+        environment:
+            no_proxy: "gateway"
+        networks:
+            - functions
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+    alertmanager:
+        image: functions/alertmanager:latest    # autobuild from Dockerfile in repo.
+        environment:
+            no_proxy: "gateway"
+        command:
+            - '-config.file=/alertmanager.yml'
+        networks:
+            - functions
+        ports:
+            - 9093:9093
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+    # Code execution functions on FaaS
+    # Python Code Execution
+    python:
+        image: jockdarock/time2py:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python3 time2py.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+
+    # Golang Code Execution
+    golang:
+        image: jockdarock/time2go:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python3 time2go.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+
+    # Time2Code Code Editor / Flask Web Server
+    time2codeserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.nofaas
+    deploy:
+      replicas: 2
+    image: jockdarock/time2codeserver:latest
+    networks:
+      - functions
+    ports:
+      - "5555:5555"
+
+networks:
+    functions:
+        driver: overlay
