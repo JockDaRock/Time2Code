@@ -8,8 +8,9 @@ spec:
     port: 5555
     protocol: TCP
     targetPort: 5555
+    nodePort: 33333
   selector:
-    app: -insert-app-name-here-
+    app: time2codeserver
     component: time2codeserver
 
 ---
@@ -23,7 +24,7 @@ spec:
     revision: 0
   selector:
     matchLabels:
-      app: -insert-app-name-here-
+      app: time2codeserver
       component: time2codeserver
   strategy:
     rollingUpdate:
@@ -33,12 +34,13 @@ spec:
   template:
     metadata:
       labels:
-        app: -insert-app-name-here-
+        app: time2codeserver
         component: time2codeserver
     spec:
       containers:
-      - image: time2codeserver
+      - image: jockdarock/time2codeserver:latest
         name: time2codeserver
+        imagePullPolicy: Always
         ports:
         - containerPort: 5555
           protocol: TCP

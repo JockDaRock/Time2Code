@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nofaas
-    image: time2codeserver
+    image: jockdarock/time2codeserver:latest
     networks:
       - time2net
     ports:
