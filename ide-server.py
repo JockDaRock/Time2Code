@@ -30,14 +30,15 @@ def time2code():
     return render_template('index-panel.html')
 
 
-@app.route('/code/python', methods=['POST'])
+@app.route('/code', methods=['POST'])
 def codepy():
     if request.method == 'POST':
         data = request.data
+        lang = request.args.get('lang')
         hosturl = urlparse(request.url)
         host = hosturl.hostname
         # url = "http://%s:8080/function/time2py" % host
-        url = "http://%s:8080/function/python" % faas
+        url = "http://%s:8080/function/time2code_%s" % (faas, lang)
         # print(url)
         headers = {"Content-Type": "text/plain"}
 
@@ -57,7 +58,7 @@ def codego():
         hosturl = urlparse(request.url)
         host = hosturl.hostname
         # url = "http://%s:8080/function/time2py" % host
-        url = "http://%s:8080/function/golang" % faas
+        url = "http://%s:8080/function/time2code_golang" % faas
         # print(url)
         headers = {"Content-Type": "text/plain"}
 

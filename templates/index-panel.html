@@ -349,7 +349,7 @@
                     mode = getmode.options[getmode.selectedIndex].value;
                     var IDE = ace.edit("IDE");
                     var code = IDE.getValue();
-                    var url = "http://" + location.host + "/code/" + mode;
+                    var url = "http://" + location.host + "/code?lang=" + mode;
                     console.log(url)
                     $.ajax({
                         url: url,

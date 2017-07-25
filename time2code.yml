@@ -4,17 +4,17 @@ provider:
   network: "func_functions" # this is optional and defaults to func_functions
 
 functions:
-  golang:
+  time2code_golang:
     lang: python3
     fprocess: python3 time2go.py
     image: jockdarock/time2go:latest
 
-  python:
+  time2code_python:
     lang: python3
     fprocess: python3 time2py.py
     image: jockdarock/time2py:latest
 
-  powershell:
+  time2code_powershell:
     lang: powershell
     fprocess: powershell
     image: jockdarock/time2powershell:latest
