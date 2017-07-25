@@ -77,16 +77,18 @@ services:
 
     # Time2Code Code Editor / Flask Web Server
     time2codeserver:
-    build:
-      context: .
-      dockerfile: Dockerfile.nofaas
-    deploy:
-      replicas: 2
-    image: jockdarock/time2codeserver:latest
-    networks:
-      - functions
-    ports:
-      - "5555:5555"
+      depends_on:
+            - gateway
+      build:
+        context: .
+        dockerfile: Dockerfile.nofaas
+      deploy:
+        replicas: 2
+      image: jockdarock/time2codeserver:latest
+      networks:
+        - functions
+      ports:
+        - "5555:5555"
 
 networks:
     functions:
