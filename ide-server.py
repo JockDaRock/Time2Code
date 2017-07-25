@@ -8,19 +8,26 @@ import subprocess
 
 app = Flask(__name__)
 
-p1 = subprocess.Popen(["/sbin/ip", "route"], stdout=subprocess.PIPE)
-p2 = subprocess.Popen(["awk", "/default/ { print $3 }"], stdin=p1.stdout, stdout=subprocess.PIPE)
-faas = (p2.stdout).read().decode("utf-8").replace("\n", "")
+try:
+    # Looking for the IP address on the K8s
+    faas = os.environ['GATEWAY_SERVICE_HOST']
+except Exception:
+    # finds Docker swarm host IP upon no K8s
+    p1 = subprocess.Popen(["/sbin/ip", "route"], stdout=subprocess.PIPE)
+    p2 = subprocess.Popen(["awk", "/default/ { print $3 }"], stdin=p1.stdout, stdout=subprocess.PIPE)
+    faas = (p2.stdout).read().decode("utf-8").replace("\n", "")
 
 
 @app.route('/')
 def time2code():
-    url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
+    # Content for adding additonal instructional panels at a later date
+    """url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
     r = requests.get(url)
     mark = r.text
 
     content = Markup(markdown.markdown(mark))
-    return render_template('index-panel.html', markd=content)
+    return render_template('index-panel.html', markd=content)"""
+    return render_template('index-panel.html')
 
 
 @app.route('/code/python', methods=['POST'])

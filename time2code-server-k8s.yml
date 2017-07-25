@@ -3,12 +3,13 @@ kind: Service
 metadata:
   name: time2codeserver
 spec:
+  type: NodePort
   ports:
   - name: time2codeserver-5555
     port: 5555
     protocol: TCP
     targetPort: 5555
-    nodePort: 33333
+    nodePort: 31114
   selector:
     app: time2codeserver
     component: time2codeserver
@@ -41,6 +42,9 @@ spec:
       - image: jockdarock/time2codeserver:latest
         name: time2codeserver
         imagePullPolicy: Always
+        env:
+        - name: time2code_provider_url
+          value: "http://time2codeserver.default:5555"
         ports:
         - containerPort: 5555
           protocol: TCP
