@@ -2,8 +2,15 @@ from flask import Flask, request, render_template, Markup
 import requests
 from urllib.parse import urlparse
 import markdown
+import os
+import subprocess
+
 
 app = Flask(__name__)
+
+p1 = subprocess.Popen(["/sbin/ip", "route"], stdout=subprocess.PIPE)
+p2 = subprocess.Popen(["awk", "/default/ { print $3 }"], stdin=p1.stdout, stdout=subprocess.PIPE)
+faas = (p2.stdout).read().decode("utf-8").replace("\n", "")
 
 
 @app.route('/')
@@ -23,8 +30,8 @@ def codepy():
         hosturl = urlparse(request.url)
         host = hosturl.hostname
         # url = "http://%s:8080/function/time2py" % host
-        url = "http://127.0.0.1:8080/function/time2py"
-        print(url)
+        url = "http://%s:8080/function/python" % faas
+        # print(url)
         headers = {"Content-Type": "text/plain"}
 
         code_exec = requests.post(url, data=data, headers=headers)
@@ -43,8 +50,8 @@ def codego():
         hosturl = urlparse(request.url)
         host = hosturl.hostname
         # url = "http://%s:8080/function/time2py" % host
-        url = "http://127.0.0.1:8080/function/time2go"
-        print(url)
+        url = "http://%s:8080/function/golang" % faas
+        # print(url)
         headers = {"Content-Type": "text/plain"}
 
         code_exec = requests.post(url, data=data, headers=headers)
@@ -57,4 +64,4 @@ def codego():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5555)
+    app.run(host="0.0.0.0", port=5555, debug=True)

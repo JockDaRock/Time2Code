@@ -1,0 +1,14 @@
+version: "3.0"
+services:
+  time2codeserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.nofaas
+    image: time2codeserver
+    networks:
+      - time2net
+    ports:
+      - "5555:5555"
+networks:
+    time2net:
+        driver: overlay
