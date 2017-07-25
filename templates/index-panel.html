@@ -285,7 +285,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.7/ace.js"></script>
 <script>
     var IDE = ace.edit("IDE");
-    IDE.setTheme("ace/theme/chaos");
+    IDE.setTheme("ace/theme/vibrant_ink");
     IDE.session.setMode("ace/mode/python");
     IDE.setShowPrintMargin(false);
 
@@ -317,7 +317,7 @@
                                 var mode = document.getElementById("mode");
                                 console.log(mode.options[mode.selectedIndex].value);
                                 var IDE = ace.edit("IDE");
-                                IDE.setTheme("ace/theme/chaos");
+                                IDE.setTheme("ace/theme/vibrant_ink");
                                 IDE.session.setMode("ace/mode/" + mode);
                                 IDE.setOption("showPrintMargin", false);
                             });
