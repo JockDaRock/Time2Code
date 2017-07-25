@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: time2codeserver
+spec:
+  ports:
+  - name: time2codeserver-5555
+    port: 5555
+    protocol: TCP
+    targetPort: 5555
+  selector:
+    app: -insert-app-name-here-
+    component: time2codeserver
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: time2codeserver
+spec:
+  replicas: 1
+  rollbackTo:
+    revision: 0
+  selector:
+    matchLabels:
+      app: -insert-app-name-here-
+      component: time2codeserver
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: -insert-app-name-here-
+        component: time2codeserver
+    spec:
+      containers:
+      - image: time2codeserver
+        name: time2codeserver
+        ports:
+        - containerPort: 5555
+          protocol: TCP
+      restartPolicy: Always
