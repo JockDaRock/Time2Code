@@ -20,7 +20,7 @@ The following snippet will initialize your swarm, Time2Code, FaaS and Time2code 
 docker swarm init --advertise-addr eth0 && \
   git clone https://github.com/JockDaRock/Time2Code && \
   cd Time2Code && \
-  ./time2deploy.sh && \
+  bash time2deploy.sh && \
   docker service ls
 ```
 
