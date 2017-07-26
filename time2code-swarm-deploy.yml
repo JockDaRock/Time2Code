@@ -62,8 +62,6 @@ services:
             fprocess: "python3 time2py.py"
             no_proxy: "gateway"
             https_proxy: $https_proxy
-            read_timeout: "180"
-            write_timeout: "180"
 
     # Golang Code Execution
     golang:
@@ -78,8 +76,6 @@ services:
             fprocess: "python3 time2go.py"
             no_proxy: "gateway"
             https_proxy: $https_proxy
-            read_timeout: "180"
-            write_timeout: "180"
 
     # Time2Code Code Editor / Flask Web Server
     time2codeserver:
