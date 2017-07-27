@@ -81,6 +81,22 @@ services:
             read_timeout: "60"
             write_timeout: "60"
 
+    # Powershell Code Execution
+    powershell:
+        image: jockdarock/time2powershell:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python3 time2powershell.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+            read_timeout: "60"
+            write_timeout: "60"
+
     # Time2Code Code Editor / Flask Web Server
     time2codeserver:
       depends_on:
