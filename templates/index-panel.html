@@ -308,14 +308,16 @@
             <form class="navbar-form navbar-right">
                 <div class="form-group">
                   <select id="mode" class="form-control" style="float:right;">
-                    <option>python</option>
-                    <option>golang</option>
+                    <option value="python">python</option>
+                    <option value="golang">golang</option>
+                    <option value="powershell">powershell</option>
                   </select>
                     <script>
                         document.addEventListener("DOMContentLoaded", function(event){
                             $("#mode").change(function() {
-                                var mode = document.getElementById("mode");
-                                console.log(mode.options[mode.selectedIndex].value);
+                                var modeElement = document.getElementById("mode");
+                                mode = modeElement.options[modeElement.selectedIndex].value;
+                                console.log(mode);
                                 var IDE = ace.edit("IDE");
                                 IDE.setTheme("ace/theme/vibrant_ink");
                                 IDE.session.setMode("ace/mode/" + mode);
@@ -341,7 +343,8 @@
           return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        var term = new Terminal({cursorBlink: true});
+        Terminal.loadAddon('fit');
+        var term = new Terminal({cursorBlink: true, rows: 80});
         term.open(document.getElementById('terminal'));
 
         function termchange() {
@@ -375,7 +378,7 @@
         async function termclear() {
             term.destroy();
             await sleep(100);
-            term = new Terminal({cursorBlink: true});
+            term = new Terminal({cursorBlink: true, rows: 80});
             term.open(document.getElementById('terminal'));
         };
     </script>

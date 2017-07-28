@@ -30,5 +30,5 @@ If you are on your laptop navigate to http://127.0.0.1:5555 and start coding.
 
 ### Coding Languages Currently Supported
 
-* Python, Golang... more coming very soon.
+* Python, Golang, Powershell... more coming very soon.
 
