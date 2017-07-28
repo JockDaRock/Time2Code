@@ -311,6 +311,8 @@
                     <option value="python">python</option>
                     <option value="golang">golang</option>
                     <option value="powershell">powershell</option>
+                    <option value="csharp">csharp</option>
+                    <option value="javascript">nodejs</option>
                   </select>
                     <script>
                         document.addEventListener("DOMContentLoaded", function(event){
@@ -349,7 +351,7 @@
 
         function termchange() {
                     var getmode = document.getElementById("mode");
-                    mode = getmode.options[getmode.selectedIndex].value;
+                    mode = getmode.options[getmode.selectedIndex].text;
                     var IDE = ace.edit("IDE");
                     var code = IDE.getValue();
                     var url = "http://" + location.host + "/code?lang=" + mode;
