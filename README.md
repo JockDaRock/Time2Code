@@ -26,7 +26,7 @@ docker swarm init --advertise-addr eth0 && \
 
 If you are on your laptop navigate to http://127.0.0.1:5555 and start coding.
 
-![](./images/code_python.png)
+![](images/python_sample0.png)
 
 ### Coding Languages Currently Supported
 
