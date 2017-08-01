@@ -54,5 +54,5 @@ Currently in progress:
 
 * Kubernetes Support
 
-Time2Code is written mostly in Python and is MIT licensed - contributions are welcomed whether that means providing feedback, testing existing and new feature or hacking on the source. This project is still in early stages so I need to people to generally test functionality, I need help building new code execution handlers for different languages or suggestions for languages to add. I also need help reducing the image sizes for the Microsoft languages handlers (Powershell and C#).
+Time2Code is written mostly in Python and is MIT licensed - contributions are welcomed whether that means providing feedback, testing existing and new feature or hacking on the source. This project is still in early stages so I need to people to generally test functionality, I need help building new code execution handlers for different languages or suggestions for languages to add. I also need help reducing the image sizes for the Microsoft languages handlers ([Powershell](https://github.com/JockDaRock/Time2Powershell) and [C#](https://github.com/JockDaRock/Time2CSharp)).
 
