@@ -98,7 +98,7 @@ services:
             write_timeout: "60"
 
     # DotNet / C# Code Execution
-    csharp:
+    csharp-experimental:
         image: jockdarock/time2csharp:latest
         labels:
             function: "true"
