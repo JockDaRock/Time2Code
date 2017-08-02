@@ -1,6 +1,6 @@
 provider:
   name: faas
-  gateway: http://ip10-0-11-3-31112.host1.labs.play-with-k8s.com
+  gateway: http://localhost:31112
 
 functions:
   golang:
