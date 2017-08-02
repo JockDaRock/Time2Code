@@ -19,7 +19,7 @@ functions:
     fprocess: powershell
     image: jockdarock/time2powershell:latest
 
-  time2code:
-    lang: python3
-    fprocess: python3 ide.py
-    image: jockdarock/time2code:latest
+  time2code_nodejs:
+    lang: powershell
+    fprocess: python3 time2nodejs.py
+    image: jockdarock/time2nodejs:latest
