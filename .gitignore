@@ -7,3 +7,4 @@
 *.iml
 out
 gen
+.time2code-faas-cli-minikube.yml

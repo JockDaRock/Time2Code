@@ -12,12 +12,14 @@ try:
     # Looking for the IP address on the K8s
     faas = os.environ['GATEWAY_SERVICE_HOST']
     faas_port = os.environ['GATEWAY_SERVICE_PORT']
+    swarm_tag = ""
 except Exception:
     # finds Docker swarm host IP upon no K8s
     p1 = subprocess.Popen(["/sbin/ip", "route"], stdout=subprocess.PIPE)
     p2 = subprocess.Popen(["awk", "/default/ { print $3 }"], stdin=p1.stdout, stdout=subprocess.PIPE)
     faas = (p2.stdout).read().decode("utf-8").replace("\n", "")
     faas_port = 8080
+    swarm_tag = "time2code_"
 
 
 @app.route('/')
@@ -40,7 +42,7 @@ def codepy():
         hosturl = urlparse(request.url)
         host = hosturl.hostname
         # url = "http://%s:%s/function/time2py" % host
-        url = "http://%s:%s/function/%s" % (faas, faas_port, lang)
+        url = "http://%s:%s/function/%s%s" % (faas, faas_port, swarm_tag, lang)
         # print(url)
         headers = {"Content-Type": "text/plain"}
 
