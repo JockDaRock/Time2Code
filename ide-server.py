@@ -11,11 +11,13 @@ app = Flask(__name__)
 try:
     # Looking for the IP address on the K8s
     faas = os.environ['GATEWAY_SERVICE_HOST']
+    faas_port = os.environ['GATEWAY_SERVICE_PORT']
 except Exception:
     # finds Docker swarm host IP upon no K8s
     p1 = subprocess.Popen(["/sbin/ip", "route"], stdout=subprocess.PIPE)
     p2 = subprocess.Popen(["awk", "/default/ { print $3 }"], stdin=p1.stdout, stdout=subprocess.PIPE)
     faas = (p2.stdout).read().decode("utf-8").replace("\n", "")
+    faas_port = 8080
 
 
 @app.route('/')
@@ -37,8 +39,8 @@ def codepy():
         lang = request.args.get('lang')
         hosturl = urlparse(request.url)
         host = hosturl.hostname
-        # url = "http://%s:8080/function/time2py" % host
-        url = "http://%s:8080/function/time2code_%s" % (faas, lang)
+        # url = "http://%s:%s/function/time2py" % host
+        url = "http://%s:%s/function/%s" % (faas, faas_port, lang)
         # print(url)
         headers = {"Content-Type": "text/plain"}
 

@@ -1,25 +1,20 @@
 provider:
   name: faas
-  gateway: http://localhost:8080
-  network: "func_functions" # this is optional and defaults to func_functions
+  gateway: http://ip10-0-11-3-31112.host1.labs.play-with-k8s.com
 
 functions:
-  time2code_golang:
-    lang: python3
+  golang:
     fprocess: python3 time2go.py
     image: jockdarock/time2go:latest
 
-  time2code_python:
-    lang: python3
+  python:
     fprocess: python3 time2py.py
     image: jockdarock/time2py:latest
 
-  time2code_powershell:
-    lang: powershell
-    fprocess: powershell
+  powershell:
+    fprocess: python3 time2powershell.py
     image: jockdarock/time2powershell:latest
 
-  time2code_nodejs:
-    lang: powershell
+  nodejs:
     fprocess: python3 time2nodejs.py
     image: jockdarock/time2nodejs:latest
