@@ -138,7 +138,7 @@ services:
         dockerfile: Dockerfile.nofaas
       deploy:
         replicas: 2
-      image: jockdarock/time2codeserver:dev
+      image: jockdarock/time2codeserver:latest
       networks:
         - functions
       ports:
