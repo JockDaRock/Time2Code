@@ -55,26 +55,6 @@ def codepy():
         return resp
 
 
-@app.route('/code/golang', methods=['POST'])
-def codego():
-    if request.method == 'POST':
-        data = request.data
-        hosturl = urlparse(request.url)
-        host = hosturl.hostname
-        # url = "http://%s:8080/function/time2py" % host
-        url = "http://%s:8080/function/time2code_golang" % faas
-        # print(url)
-        headers = {"Content-Type": "text/plain"}
-
-        code_exec = requests.post(url, data=data, headers=headers)
-
-        resp = code_exec.text
-
-        # print(repr(resp))
-
-        return resp
-
-
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5555, debug=True)
 

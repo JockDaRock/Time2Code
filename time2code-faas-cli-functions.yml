@@ -18,3 +18,7 @@ functions:
   nodejs:
     fprocess: python3 time2nodejs.py
     image: jockdarock/time2nodejs:latest
+
+  csharp-experimental:
+    fprocess: python3 time2CSharp.py
+    image: jockdarock/time2csharp:latest

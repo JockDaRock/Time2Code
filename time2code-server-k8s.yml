@@ -39,7 +39,7 @@ spec:
         component: time2codeserver
     spec:
       containers:
-      - image: jockdarock/time2codeserver:dev
+      - image: jockdarock/time2codeserver:latest
         name: time2codeserver
         imagePullPolicy: Always
         env:

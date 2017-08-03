@@ -4,7 +4,7 @@ A portable, scaleable web based code editor to integrate into your code learning
 The goal is to make deploying your own web based code editor easier and more fun.
 
 ## Tech Overview
-* The Code execution backend is built off of the serverless [FaaS](http://docs.get-faas.com/) Framework for scalability and ability to support many languages.  Although support for [k8s](https://kubernetes.io/) is currently being tested on [faas-netes](https://github.com/alexellis/faas-netes) and this project and appears to be fairly successful, currently primary support is on Docker Swarm for Time2Code with the intention to make it fully operation on Kubernetes as well.
+* The Code execution backend is built off of the serverless [FaaS](http://docs.get-faas.com/) Framework for scalability and ability to support many languages.  Support for [k8s](https://kubernetes.io/) is ready through [faas-netes](https://github.com/alexellis/faas-netes) and appears to be working well.
 
 * Function handling and code excution are being handled by Python processes.  Python handles the STDIN of all of the function requests and then passes it to the desired language for interpretation and execution or compilation and execution.
 
@@ -15,6 +15,8 @@ The goal is to make deploying your own web based code editor easier and more fun
 * Terminal is built from [XTermJS](https://xtermjs.org/).
 
 ## Up and Running
+
+### Docker Swarm
 
 The following snippet will initialize your swarm, Time2Code, FaaS and Time2code functions.
 
@@ -27,6 +29,29 @@ $ docker swarm init --advertise-addr eth0 && \
 ```
 
 If you are on your laptop navigate to http://127.0.0.1:5555 and start coding.
+
+
+### Kubernetes (minikube)
+
+You will need to have [minikube installed](https://kubernetes.io/docs/tasks/tools/install-minikube/) before you begin.
+
+Type the following snippets will get minikube started and faas-netes loaded into the kube cluster.
+
+`$ git clone https://github.com/JockDaRock/Time2Code`
+
+`$ minikube start` or `$ minikube start --vm-driver=xhyve`
+
+Then run the following bash script to load Faas and Time2Code...
+
+`$ bash minikube.sh'
+
+Once the script is complete it will provide you with the url, like this http://192.168.99.100:31114/, to reach the Time2Code web editor.  **BEFORE** you start using it, you will need to deploy the code execution functions after the Faas services have started.  It might take a minute or two for all of the necessary Kube pods to be Running.  Keep checking the pods with `kubectl get pods` to make sure the pods are running.  
+
+To deploy the functions use the following command in your terminal.
+
+`faas-cli -action deploy -f .time2code-faas-cli-minikube.yml`
+
+Once the kube pods for the code execution are running you can get to coding :)!
 
 ![](images/python_sample0.png)
 
