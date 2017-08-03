@@ -14,6 +14,7 @@ while [ $(awk '/gateway/ {print $3}' .pod_running) != "Running" ]; do
     echo "waiting for faas to start"
     sleep 1
     kubectl get pods > .pod_running
+done
 
 sed "s/localhost/$(minikube ip)/" time2code-faas-cli-functions.yml > .time2code-faas-cli-minikube.yml
 
