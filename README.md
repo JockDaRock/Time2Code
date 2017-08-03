@@ -41,15 +41,15 @@ Type the following snippets will get minikube started and faas-netes loaded into
 
 `$ minikube start` or `$ minikube start --vm-driver=xhyve`
 
-Then run the following bash script to load Faas and Time2Code...
+Then run the following bash script to load FaaS and Time2Code...
 
-`$ bash minikube.sh'
+`$ bash ./minikube.sh'
 
-Once the script is complete it will provide you with the url, like this http://192.168.99.100:31114/, to reach the Time2Code web editor.  **BEFORE** you start using it, you will need to deploy the code execution functions after the Faas services have started.  It might take a minute or two for all of the necessary Kube pods to be Running.  Keep checking the pods with `kubectl get pods` to make sure the pods are running.  
+Once the script is complete it will provide you with the url, like this http://192.168.99.100:31114/, to reach the Time2Code web editor.  **BEFORE** you start using it, you will need to deploy the code execution functions after the FaaS services have started.  It might take a minute or two for all of the necessary Kube pods to be Running.  Keep checking the pods with `kubectl get pods`.  
 
 To deploy the functions use the following command in your terminal.
 
-`faas-cli -action deploy -f .time2code-faas-cli-minikube.yml`
+`$ faas-cli -action deploy -f .time2code-faas-cli-minikube.yml`
 
 Once the kube pods for the code execution are running you can get to coding :)!
 
