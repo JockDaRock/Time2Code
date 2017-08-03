@@ -16,8 +16,6 @@ The goal is to make deploying your own web based code editor easier and more fun
 
 * Terminal is built from [XTermJS](https://xtermjs.org/).
 
-* UI Modeled after the wonderful [Play with Moby Site](http://play-with-moby.com) and the wonderful work the guys at [Play-With_Docker](https://github.com/play-with-docker/play-with-docker) do to make our Docker Learning Experiences Better.
-
 ## Up and Running
 
 ### Docker Swarm
