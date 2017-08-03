@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+<!-- UI based on the Play-With-Moby site and by the team at Play-With-Docker and the learning experiences they deliver everyday -->
 
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -238,16 +238,12 @@
 </style>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-<link rel="alternate" type="application/rss+xml" title="Play with Moby" href="http://training.play-with-docker.com/feed.xml">
 </head>
-
-
   <body>
 
     <header class="site-header">
 <nav class="navbar navbar-default navbar-inverse">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -281,7 +277,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="https://rawgit.com/RickStrahl/jquery-resizable/master/dist/jquery-resizable.min.js"></script>
-<script src="https://cdn.rawgit.com/play-with-docker/sdk/21b8ad08/dist/pwd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.7/ace.js"></script>
 <script>
     var IDE = ace.edit("IDE");
@@ -292,7 +287,6 @@
     $(".panel-left").resizable({
         handleSelector: ".splitter",
         resizeHeight: false,
-        onDragEnd: pwd.resize.bind(pwd)
     });
 </script>
 
