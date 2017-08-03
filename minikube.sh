@@ -13,7 +13,7 @@ running="notRunning"
 while [  $running != "Running" ]; do
     echo "waiting for faas to start"
     sleep 1
-    if [kubectl get pods | awk '{print $3}' != "Running"]
+    if [ $(kubectl get pods | awk '{print $3}') != "Running" ]
     then
         pass
     else
