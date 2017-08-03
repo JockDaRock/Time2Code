@@ -37,6 +37,8 @@ You will need to have [minikube installed](https://kubernetes.io/docs/tasks/tool
 
 Type the following snippets will get minikube started and faas-netes loaded into the kube cluster.
 
+`$ git clone https://github.com/JockDaRock/Time2Code`
+
 `$ minikube start` or `$ minikube start --vm-driver=xhyve`
 
 Then run the following bash script to load Faas and Time2Code...
