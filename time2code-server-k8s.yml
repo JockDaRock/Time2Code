@@ -20,7 +20,7 @@ kind: Deployment
 metadata:
   name: time2codeserver
 spec:
-  replicas: 1
+  replicas: 3
   rollbackTo:
     revision: 0
   selector:
@@ -29,7 +29,7 @@ spec:
       component: time2codeserver
   strategy:
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 3
       maxUnavailable: 1
     type: RollingUpdate
   template:

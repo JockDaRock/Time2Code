@@ -1,0 +1,24 @@
+provider:
+  name: faas
+  gateway: http://localhost:31112
+
+functions:
+  golang:
+    fprocess: python3 time2go.py
+    image: jockdarock/time2go:latest
+
+  python:
+    fprocess: python3 time2py.py
+    image: jockdarock/time2py:latest
+
+  powershell:
+    fprocess: python3 time2powershell.py
+    image: jockdarock/time2powershell:latest
+
+  nodejs:
+    fprocess: python3 time2nodejs.py
+    image: jockdarock/time2nodejs:latest
+
+  csharp-experimental:
+    fprocess: python3 time2CSharp.py
+    image: jockdarock/time2csharp:latest
