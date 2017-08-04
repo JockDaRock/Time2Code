@@ -6,9 +6,9 @@ The goal is to make deploying your own web based code editor easier and more fun
 ## Tech Overview
 * The Code execution backend is built off of the serverless [FaaS](http://docs.get-faas.com/) Framework for scalability and ability to support many languages.  Support for [k8s](https://kubernetes.io/) is ready through [faas-netes](https://github.com/alexellis/faas-netes) and appears to be working well.
 
-* UI Modeled after the wonderful [Play with Moby Site](http://play-with-moby.com) and the wonderful work the guys at [Play-With_Docker](https://github.com/play-with-docker/play-with-docker) do to make our Docker Learning Experiences Better.
+* UI Modeled after the wonderful [Play-with-Moby Site](http://play-with-moby.com) and the wonderful work the guys at [Play-With-Docker](https://github.com/play-with-docker/play-with-docker) do to make our Docker Learning Experiences Better.
 
-* Function handling and code excution are being handled by Python processes.  Python handles the STDIN of all of the function requests and then passes it to the desired language for interpretation and execution or compilation and execution.
+* Function handling and code execution are being handled by Python processes.  Python handles the STDIN of all of the function requests and then passes it to the desired language for interpretation and execution or compilation and execution.
 
 * Web site is being driven by the [Flask](http://flask.pocoo.org/) Framework as a Swarm service.
 

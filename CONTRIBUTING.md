@@ -15,10 +15,6 @@ Here are a few guidelines for contributing:
 
 This project is written in mostly Python.  If you'd like to help in any way then that would be more than welcome whatever your level of experience.
 
-#### Community file
-
-The [community.md](https://github.com/JockDaRock/Time2Code/blob/master/community.md) file highlights blogs, talks and code repos with example FaaS functions and usages. Please send a Pull Request if you are doing something cool with FaaS.
-
 ### License
 
 This project is licensed under the MIT License.
