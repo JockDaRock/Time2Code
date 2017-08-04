@@ -3,6 +3,8 @@ A portable, scaleable web based code editor to integrate into your code learning
 
 The goal is to make deploying your own web based code editor easier and more fun.
 
+![](/images/code_gif.gif)
+
 ## Tech Overview
 * The Code execution backend is built off of the serverless [FaaS](http://docs.get-faas.com/) Framework for scalability and ability to support many languages.  Support for [k8s](https://kubernetes.io/) is ready through [faas-netes](https://github.com/alexellis/faas-netes) and appears to be working well.
 
@@ -51,7 +53,7 @@ Once the script is complete it will provide you with the url, like this http://1
 
 To deploy the functions use the following command in your terminal.
 
-`$ faas-cli -action deploy -f .time2code-faas-cli-minikube.yml`
+`$ faas-cli -action deploy -f ./time2code-faas-cli-minikube.yml`
 
 Once the kube pods for the code execution are running you can get to coding :)!
 
