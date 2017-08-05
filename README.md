@@ -59,6 +59,12 @@ Once the kube pods for the code execution are running you can get to coding :)!
 
 ![](images/python_sample0.png)
 
+## Latest News
+
+[Time2Code: Functions as Service and Code as a Function](https://medium.com/@JockDaRock/time2code-functions-as-service-and-code-as-a-function-3d9125fc49fb)
+
+
+
 ## Coding Languages Currently Supported
 
 * Python, Golang, Powershell, NodeJS, ... more coming very soon.
