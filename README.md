@@ -1,5 +1,5 @@
 # Time2Code
-A portable, scaleable web based code editor to integrate into your code learning experiences.
+A portable, scalable web based code editor to integrate into your code learning experiences.
 
 The goal is to make deploying your own web based code editor easier and more fun.
 
@@ -8,7 +8,7 @@ The goal is to make deploying your own web based code editor easier and more fun
 ## Tech Overview
 * The Code execution backend is built off of the serverless [FaaS](http://docs.get-faas.com/) Framework for scalability and ability to support many languages.  Support for [k8s](https://kubernetes.io/) is ready through [faas-netes](https://github.com/alexellis/faas-netes) and appears to be working well.
 
-* UI Modeled after the wonderful [Play-with-Moby Site](http://play-with-moby.com) and the wonderful work the guys at [Play-With-Docker](https://github.com/play-with-docker/play-with-docker) do to make our Docker Learning Experiences Better.
+* UI Modelled after the wonderful [Play-with-Moby Site](http://play-with-moby.com) and the wonderful work the guys at [Play-With-Docker](https://github.com/play-with-docker/play-with-docker) do to make our Docker Learning Experiences Better.
 
 * Function handling and code execution are being handled by Python processes.  Python handles the STDIN of all of the function requests and then passes it to the desired language for interpretation and execution or compilation and execution.
 
@@ -69,7 +69,7 @@ Once the kube pods for the code execution are running you can get to coding :)!
 
 * Python, Golang, Powershell, NodeJS, ... more coming very soon.
 
-* Currently working on... I am currently working C# code excution. Most of my tests are running well, but need to iron out some necessary dependancies and other issues.
+* Currently working on... I am currently working C# code execution. Most of my tests are running well, but need to iron out some necessary dependencies and other issues.
 
 #### Repos for language specific code execution handlers
 * [Python](https://github.com/JockDaRock/Time2Py)
