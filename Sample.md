@@ -1,4 +1,4 @@
-# Play with Code
+# Test out your code
 
 ## Random instructions
 
@@ -15,3 +15,11 @@ print(r.status_code)
 print(r.headers)
 print(r.text)
 ```
+
+Then click the `RUN IT` button at the bottom navigation bar.
+
+Wait a sec...
+
+dot dot dot
+
+and the your code complete.
