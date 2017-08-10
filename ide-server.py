@@ -53,24 +53,24 @@ def code():
 
 @app.route('/tutorial')
 def tutorial():
-    text = request.args.get('code') + "?raw=true"
+    text = request.args.get('code')
     straight_text = request.args.get('straight_text')
-    get_tut = request.args.get('tut') + "?raw=true"
+    get_tut = request.args.get('tut')
     code_text = ""
     tut_url = ""
     mark = ""
 
     if get_tut:
-        tut_url = get_tut
-        r = requests.get(tut_url)
-        mark = r.text
+        tut_url = get_tut + "?raw=true"
+        r_tut = requests.get(tut_url)
+        mark = r_tut.text
     else:
         tut_url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
-        r = requests.get(tut_url)
-        mark = r.text
+        r_tut = requests.get(tut_url)
+        mark = r_tut.text
 
     if text:
-        r_text = requests.get(text)
+        r_text = requests.get(text + "?raw=true")
         code_text = r_text.text
     elif straight_text:
         code_text = straight_text
