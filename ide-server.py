@@ -53,18 +53,27 @@ def code():
 
 @app.route('/tutorial')
 def tutorial():
-    text = request.args.get('tut')
+    text = request.args.get('code') + "?raw=true"
     straight_text = request.args.get('straight_text')
+    get_tut = request.args.get('tut') + "?raw=true"
     code_text = ""
+    tut_url = ""
+    mark = ""
+
+    if get_tut:
+        tut_url = get_tut
+        r = requests.get(tut_url)
+        mark = r.text
+    else:
+        tut_url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
+        r = requests.get(tut_url)
+        mark = r.text
 
     if text:
         r_text = requests.get(text)
         code_text = r_text.text
     elif straight_text:
         code_text = straight_text
-    url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
-    r = requests.get(url)
-    mark = r.text
 
     content = Markup(markdown.markdown(mark, extensions=['pymdownx.github', 'pymdownx.highlight']))
     return render_template('index-tut.html', markdown=content, code_text=code_text)
