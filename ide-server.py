@@ -26,18 +26,12 @@ except Exception:
 
 @app.route('/')
 def time2code():
-    # Content for adding additonal instructional panels at a later date
-    """url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
-    r = requests.get(url)
-    mark = r.text
 
-    content = Markup(markdown.markdown(mark))
-    return render_template('index-panel.html', markd=content)"""
     return render_template('index-panel.html')
 
 
 @app.route('/code', methods=['POST'])
-def codepy():
+def code():
     if request.method == 'POST':
         data = request.data
         lang = request.args.get('lang')
@@ -55,6 +49,25 @@ def codepy():
         # print(resp)
 
         return resp
+
+
+@app.route('/tutorial')
+def tutorial():
+    text = request.args.get('tut')
+    straight_text = request.args.get('straight_text')
+    code_text = ""
+
+    if text:
+        r_text = requests.get(text)
+        code_text = r_text.text
+    elif straight_text:
+        code_text = straight_text
+    url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
+    r = requests.get(url)
+    mark = r.text
+
+    content = Markup(markdown.markdown(mark, extensions=['pymdownx.github', 'pymdownx.highlight']))
+    return render_template('index-tut.html', markdown=content, code_text=code_text)
 
 
 if __name__ == '__main__':

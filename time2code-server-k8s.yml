@@ -3,13 +3,12 @@ kind: Service
 metadata:
   name: time2codeserver
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - name: time2codeserver-5555
     port: 5555
     protocol: TCP
     targetPort: 5555
-    nodePort: 31114
   selector:
     app: time2codeserver
     component: time2codeserver
