@@ -10,8 +10,9 @@ app = Flask(__name__)
 
 try:
     # Looking for the IP address on the K8s
-    faas = os.environ['GATEWAY_SERVICE_HOST']
-    faas_port = os.environ['GATEWAY_SERVICE_PORT']
+    faas = "faas-netesd.default"
+    ip = socket.getaddrinfo(faas, 0, 0, 0, 0)
+    faas_port = 8080
     swarm_tag = ""
 except Exception:
     # finds Docker swarm host IP upon no K8s
