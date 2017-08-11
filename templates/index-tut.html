@@ -285,7 +285,7 @@
         }
 
         Terminal.loadAddon('fit');
-        var term = new Terminal({cursorBlink: true, rows: 40});
+        var term = new Terminal({cursorBlink: false, rows: 40});
         term.open(document.getElementById('terminal'));
 
         function termchange() {
