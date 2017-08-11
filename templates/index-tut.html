@@ -285,7 +285,7 @@
         }
 
         Terminal.loadAddon('fit');
-        var term = new Terminal({cursorBlink: true, rows: 40, ScrollBar: false});
+        var term = new Terminal({cursorBlink: true, rows: 40});
         term.open(document.getElementById('terminal'));
 
         function termchange() {
@@ -310,6 +310,7 @@
                                     term.writeln(termData);
                                   };
                                 writePrompt();
+                                term.scrollToBottom();
                             });
                         },
                     });
