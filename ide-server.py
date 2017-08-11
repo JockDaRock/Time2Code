@@ -65,7 +65,7 @@ def tutorial():
         r_tut = requests.get(tut_url)
         mark = r_tut.text
     else:
-        tut_url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md"
+        tut_url = "https://raw.githubusercontent.com/JockDaRock/Time2Code/master/Sample.md?raw=true"
         r_tut = requests.get(tut_url)
         mark = r_tut.text
 

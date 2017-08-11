@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/2.8.1/xterm.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/xterm/2.8.1/xterm.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/2.8.1/addons/fit/fit.js"></script>
-<script scr="https://cdn.rawgit.com/showdownjs/showdown/<version tag>/dist/showdown.min.js"></script>
+<script src="https://cdn.rawgit.com/showdownjs/showdown/<version tag>/dist/showdown.min.js"></script>
 
 <style>
     html, body {
@@ -184,14 +184,7 @@
 
         <div class="panel-left" style="overflow:auto;">
 
-                <div id="tutorial">
-                    {{ markdown }}
-                    <!--<script>
-                        var converter = new showdown.Converter(),
-                            text = {{ markdown }},
-                            html = converter.makeHtml(text);
-                    </script>-->
-                </div>
+                <div id="tutorial">{{ markdown }}</div>
                 <div class="center" hidden><ul class="pagination" id="buttons">
                     <li><a href="#">«</a></li>
                     <li><a href="#">1</a></li>
@@ -209,15 +202,14 @@
         </div>
 
         <div class="panel-right" >
-            <div class="panel-top" id="IDE">
-                {{ code_text }}
-            </div>
+            <div class="panel-top" id="IDE">{{ code_text }}</div>
 
             <div class="splitter-horizontal">
             </div>
 
-            <div class="panel-bottom" id="terminal">
-
+            <div class="panel-bottom">
+                <div id="terminal">
+                </div>
             </div>
         </div>
       </div>
