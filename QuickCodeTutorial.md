@@ -57,7 +57,7 @@ Click the **RUN IT** button and watch as your code is executed quickly.
 
 Repeat the same steps as above for the NodeJS and Python examples.
 
-**AND Dont forget to select the appropriate code langauge when running the different code snippets.
+**AND Dont forget to select the appropriate code langauge when running the different code snippets.**
 
 ### NodeJS
 
