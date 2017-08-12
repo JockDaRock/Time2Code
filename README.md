@@ -36,7 +36,7 @@ If you are on your laptop navigate to http://127.0.0.1:5555 and start coding.
 
 ### Play-with-Docker
 
-[![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/JockDaRock/Time2Code/tutorial-page/time2code-swarm-deploy.yml&stack_name=time2code)
+[![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/JockDaRock/Time2Code/master/time2code-swarm-deploy.yml&stack_name=time2code)
 
 
 ### Kubernetes (minikube)
