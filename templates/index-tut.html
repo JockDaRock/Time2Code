@@ -38,7 +38,7 @@
         height: 100%;
     }
     #IDE {
-        background-color: #000000
+        background-color: #000000;
     }
     #tutorial {
         padding-top: 25px;
@@ -112,6 +112,7 @@
     }
     .panel-bottom {
         flex: 1 1 auto;
+        background-color: #000000;
     }
     .panel-container {
         display: flex;
@@ -285,7 +286,7 @@
         }
 
         Terminal.loadAddon('fit');
-        var term = new Terminal({cursorBlink: false, rows: 40});
+        var term = new Terminal({cursorBlink: false, rows: 12});
         term.open(document.getElementById('terminal'));
 
         function termchange() {
@@ -320,7 +321,7 @@
         async function termclear() {
             term.destroy();
             await sleep(100);
-            term = new Terminal({cursorBlink: true, rows: 80});
+            term = new Terminal({cursorBlink: true, rows: 12});
             term.open(document.getElementById('terminal'));
         };
     </script>
