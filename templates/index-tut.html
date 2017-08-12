@@ -16,27 +16,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/2.8.1/xterm.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/xterm/2.8.1/xterm.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/2.8.1/addons/fit/fit.js"></script>
+<script src="https://cdn.rawgit.com/showdownjs/showdown/<version tag>/dist/showdown.min.js"></script>
 
 <style>
     html, body {
         height: 100%;
-        background-color: #052f47;
-        color: #fff
-    }
-    img {
-        max-width: 100%
-    }
-    .mt50 {
-        margin-top: 50px
-    }
-    .mt20 {
-        margin-top: 20px
-    }
-    .mt10 {
-        margin-top: 10px
-    }
-    .mb10 {
-        margin-bottom: 10px
+        background-color: #24323a;
+        color: #fff;
+        overflow: auto;
     }
     body {
         display: flex;
@@ -45,11 +32,26 @@
     body>* {
         flex: none
     }
+    #window {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
     #IDE {
-        background-color: #24323a
+        background-color: #000000;
+    }
+    #tutorial {
+        padding-top: 25px;
+        padding-right: 25px;
+        padding-bottom: 25px;
+        padding-left: 25px;
     }
     #terminal {
-        height: 100%;
+        height: 75%;
+        overflow: hidden;
+    }
+    .ace_layer ace_gutter-layer ace_folding-enabled {
+        background-color: #000000;
     }
     .navbar-header {
         margin-top: 5px
@@ -65,9 +67,10 @@
     }
     .navbar {
         border-radius: 0px;
-        margin-bottom: 0px
+        margin-bottom: 0px;
+        postion: fixed;
     }
-    .navbar.navbar-inverse {
+    .navbar.navbar-inverse, .navbar.navbar-default {
         background-color: #052f47;
         border-color: #052f47
     }
@@ -78,18 +81,16 @@
         text-decoration: underline
     }
     footer {
-        background-color: #052f47
+        background-color: #052f47;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
     .navbar-brand {
         font-weight: 900;
         margin-left: 0px !important;
         vertical-align: middle;
         float: none
-    }
-    @media screen and (max-width: 600px) {
-        .navbar-brand {
-            font-size: 1.5em
-        }
     }
     .panel {
         border: none;
@@ -98,31 +99,27 @@
     .panel:hover {
         box-shadow: 0px 0px 6px #828282
     }
-    .social {
-        list-style: none;
-        display: inline;
-        margin-left: 10px;
-        padding: 5px 8px
+    .panel-container-vertical {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
     }
-    .social:hover {
-        opacity: 0.7
+    .panel-top {
+        flex: 0 0 auto;
+        height: 50%;
+        width: 100%;
     }
-    .social img {
-        width: 20px
-    }
-    .quora img {
-        width: 17px
-    }
-    .facebook img {
-        width: 16px
+    .panel-bottom {
+        flex: 1 1 auto;
+        background-color: #000000;
     }
     .panel-container {
         display: flex;
         flex-direction: row;
         overflow: hidden;
         height: 100%;
-        flex: 1 1 auto;
-        xtouch-action: none
+        xtouch-action: none;
     }
     .terminal {
         font-size: 15px
@@ -130,110 +127,33 @@
     .panel-left {
         flex: 0 0 auto;
         width: 50%;
-        min-width: 150px
-    }
-    .content {
-        padding: 0 15px;
-        overflow-y: auto
-    }
-    .content {
-        padding: 0 15px
+        min-width: 150px;
     }
     .splitter {
         flex: 0 0 auto;
         width: 18px;
         background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #101e26;
         min-height: 200px;
-        cursor: col-resize
+        cursor: col-resize;
+    }
+    .splitter-horizontal {
+        flex: 0 0 auto;
+        height: 5px;
+        background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/hsizegrip.png) center center no-repeat #101e26;
+        cursor: row-resize;
     }
     .panel-right {
-        display: flex;
-        flex-direction: column;
         flex: 1 1 auto;
         width: 100%;
         background: #24323a
     }
-    .panel-right>div {
-        flex: 1 1 auto;
-        margin-bottom: 15px;
-        overflow-y: auto
+    .pagination {
+        clear:both;
+        position:relative;
+        text-align:center;
     }
-    .panel-right>div:last-of-type {
-        margin-bottom: 0px
-    }
-    .panel-right>div.initialized {
-        background-color: black
-    }
-    .post-tag {
-        display: inline-block;
-        background: rgba(42, 122, 226, 0.15);
-        padding: 0 .5rem;
-        margin-right: .5rem;
-        border-radius: 4px;
-        color: #2a7ae2;
-        font-family: "Open Sans", serif;
-        font-size: 90%
-    }
-    .post-tag:before {
-        content: "\f02b";
-        font-family: FontAwesome;
-        padding-right: .5em
-    }
-    .post-tag:hover {
-        text-decoration: none;
-        background: #2a7ae2;
-        color: #fff
-    }
-    small .post-tag {
-        background: #eee;
-        color: #000
-    }
-    small .post-tag:before {
-        content: none
-    }
-    small .post-tag:hover {
-        text-decoration: none;
-        background: #000;
-        color: #fff;
-        cursor: default
-    }
-    .tags-expo :target:before {
-        content: "";
-        display: block;
-        height: 72px;
-        margin: -72px 0 0
-    }
-    @media (min-width: 38em) {
-        .tags-expo .tags-expo-list {
-            font-size: 2.9rem
-        }
-        .tags-expo .tags-expo-list .post-tag {
-            margin: .2em .3em
-        }
-    }
-    .tags-expo .tags-expo-section {
-        font-family: "Open Sans", serif
-    }
-    .tags-expo .tags-expo-section ul {
-        list-style-type: circle;
-        list-style-position: inside;
-        padding: 0
-    }
-    .tags-expo .tags-expo-section ul li {
-        padding: 0 1rem
-    }
-    .tags-expo .tags-expo-section ul li:hover {
-        list-style-type: disc
-    }
-    .tags-expo .tags-expo-section a {
-        font-size: 20px
-    }
-    .tags-expo .tags-expo-section .post-date {
-        display: inline-block;
-        font-size: 80%;
-        color: #000;
-        margin: 0;
-        padding: 0
+    .center {
+        text-align: center;
     }
 </style>
 
@@ -242,10 +162,12 @@
   <body>
 
     <header class="site-header">
+
+</header>
 <nav class="navbar navbar-default navbar-inverse">
 
     <div class="container">
-      <div class="logo"><img src="../static/TIME2CODE-grey.png"></div>
+      <div class="logo"><img src="/static/TIME2CODE-grey.png"></div>
         <div class="navbar-header">
         <!--<a class="navbar-brand" href="/">Time2Code</a>-->
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -258,22 +180,42 @@
         </div>
   </div><!-- /.container-fluid -->
 </nav>
-</header>
-
-
+    <div class="panel-container-vertical">
     <div class="panel-container">
-        <div id="IDE" class="panel-left"/>
-    </div>
 
-    <div class="splitter">
-    </div>
-    <div class="panel-right">
-        <div id="terminal"></div>
-          <script>
+        <div class="panel-left" style="overflow:auto;">
 
-          </script>
+                <div id="tutorial">{{ markdown }}</div>
+                <div class="center" hidden><ul class="pagination" id="buttons">
+                    <li><a href="#">«</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">6</a></li>
+                    <li><a href="#">»</a></li>
+                </ul></div>
+
+        </div>
+
+        <div class="splitter">
+        </div>
+
+        <div class="panel-right" >
+            <div class="panel-top" id="IDE">{{ code_text }}</div>
+
+            <div class="splitter-horizontal">
+            </div>
+
+            <div class="panel-bottom">
+                <div id="terminal">
+                </div>
+            </div>
+        </div>
+      </div>
+
     </div>
-</div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -287,11 +229,14 @@
 
     $(".panel-left").resizable({
         handleSelector: ".splitter",
-        resizeHeight: false,
+        resizeHeight: false
+    });
+
+    $(".panel-top").resizable({
+        handleSelector: ".splitter-horizontal",
+        resizeWidth: false
     });
 </script>
-
-
 
   <footer>
     <nav class="navbar navbar-default">
@@ -299,6 +244,7 @@
         <ul class="nav navbar-nav">
             <li>
                 <button id="code" onclick="termchange()" class="btn btn-success navbar-btn">RUN IT</button>
+                <button id="code" onclick="termclear()" class="btn btn-danger navbar-btn">CLEAR TERM</button>
             </li>
             <form class="navbar-form navbar-right">
                 <div class="form-group">
@@ -307,7 +253,7 @@
                     <option value="golang">golang</option>
                     <option value="powershell">powershell</option>
                     <option value="javascript">nodejs</option>
-                    <option value="csharp-experimental">csharp-experimental</option>
+                    <option value="csharp">csharp-experimental</option>
                   </select>
                     <script>
                         document.addEventListener("DOMContentLoaded", function(event){
@@ -324,9 +270,6 @@
                     </script>
                 </div>
             </form>
-            <li>
-                <button id="code" onclick="termclear()" class="btn btn-danger navbar-btn">CLEAR TERM</button>
-            </li>
         </ul>
       </div>
     </nav>
@@ -341,7 +284,7 @@
         }
 
         Terminal.loadAddon('fit');
-        var term = new Terminal({cursorBlink: false, rows: 80});
+        var term = new Terminal({cursorBlink: false, rows: 12});
         term.open(document.getElementById('terminal'));
 
         function termchange() {
@@ -366,6 +309,7 @@
                                     term.writeln(termData);
                                   };
                                 writePrompt();
+                                term.scrollToBottom();
                             });
                         },
                     });
@@ -375,7 +319,7 @@
         async function termclear() {
             term.destroy();
             await sleep(100);
-            term = new Terminal({cursorBlink: true, rows: 80});
+            term = new Terminal({cursorBlink: false, rows: 12});
             term.open(document.getElementById('terminal'));
         };
     </script>
