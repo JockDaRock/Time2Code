@@ -12,7 +12,7 @@ First click the **Try in PWD** Button.
 
 Once Time2Code is started up click the 5555 tab at the top of the Play-With-Docker site.
 
-![](https://github.com/JockDaRock/Time2Code/blob/master/images/PWD-5555.png?raw=true)
+![](https://raw.githubusercontent.com/JockDaRock/Time2Code/master/images/PWD-5555.png)
 
 Add `/tutorial?tut=https://github.com/JockDaRock/Time2Code/blob/master/QuickCodeTutorial.md` to the URL in the browser.
 
@@ -22,7 +22,7 @@ Continue with the instructions below...
 
 Select the Golang code language from the menu button on the bottom navbar.
 
-![](https://github.com/JockDaRock/Time2Code/blob/master/images/lang_sel.png?raw=true)
+![](https://raw.githubusercontent.com/JockDaRock/Time2Code/master/images/lang_sel.png)
 
 Then enter the Code below in the **IDE** on the **right**.
 
