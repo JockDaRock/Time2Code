@@ -13,7 +13,7 @@ Here are a few guidelines for contributing:
 
 ### Community
 
-This project is written in mostly Python.  If you'd like to help in any way then that would be more than welcome whatever your level of experience.
+This project is written in mostly HTML and Javascript on the frontend, Python-Flask for serving the WebIDE Pages, and Python for the code execution management on the OpenFaaS framework.  If you'd like to help in any way then that would be more than welcome whatever your level of experience.
 
 ### License
 

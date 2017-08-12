@@ -38,6 +38,11 @@ If you are on your laptop navigate to http://127.0.0.1:5555 and start coding.
 
 [![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/JockDaRock/Time2Code/master/time2code-swarm-deploy.yml&stack_name=time2code)
 
+Click the **Try in PWD** and get started with Time2Code quickly.  Once your PWD instance is up and running click on the 5555 tag and start coding.
+
+![](/images/PWD-5555.png)
+
+
 
 ### Kubernetes (minikube)
 
@@ -87,11 +92,11 @@ Once the kube pods for the code execution are running you can get to coding :)!
 
 Currently in progress:
 
-* Adding markdown and instruction functionality to accompany code execution.
+* Adding markdown and instruction functionality to accompany code execution. - check and check
 
 * Add language dependency builder for code execution functions.
 
-* Kubernetes Support
+* Kubernetes Support - check and check
 
-Time2Code is written mostly in Python and is MIT licensed - contributions are welcomed whether that means providing feedback, testing existing and new feature or hacking on the source. This project is still in early stages so I need to people to generally test functionality, I need help building new code execution handlers for different languages or suggestions for languages to add. I also need help reducing the image sizes for the Microsoft languages handlers ([Powershell](https://github.com/JockDaRock/Time2Powershell) and [C#](https://github.com/JockDaRock/Time2CSharp)).
+Time2Code is written mostly in HTML and Javascript on the FrontEnd, Python and Flask to handle the WebIDE pages, and Python on the backend to handle code language execution on the OpenFaaS framework. This project is MIT licensed - contributions are welcomed whether that means providing feedback, testing existing and new features or hacking on the source. This project is still in early stages so I need to people to generally try functionality and provide feedback. I need help building new code execution handlers for different languages or suggestions for languages to add. I also need help reducing the image sizes for the Microsoft languages handlers ([Powershell](https://github.com/JockDaRock/Time2Powershell) and [C#](https://github.com/JockDaRock/Time2CSharp)).
 
