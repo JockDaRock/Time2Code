@@ -55,7 +55,7 @@ func main() {
 ```
 Click the **RUN IT** button and watch as your code is executed quickly.
 
-Repeat the same steps as above for the NodeJS and Python examples.
+Click the **CLEAR TERM** button once you are done and Repeat the same steps as above for the NodeJS and Python examples.
 
 **AND Dont forget to select the appropriate code langauge when running the different code snippets.**
 
@@ -87,3 +87,17 @@ r = requests.get(url)
 
 print(r.text)
 ```
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
