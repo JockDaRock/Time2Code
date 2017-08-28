@@ -4,6 +4,20 @@ This is a quick tutorial to highlight the tutorial page feature of Time2Code.  I
 
 I will do a few quick HTTP Request code examples you can try in a few languages.
 
+If you are viewing this on GitHub you will need to get Time2Code started before you can do anything else.
+
+First click the **Try in PWD** Button.
+
+[![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/JockDaRock/Time2Code/master/time2code-swarm-deploy.yml&stack_name=time2code)
+
+Once Time2Code is started up click the 5555 tab at the top of the Play-With-Docker site.
+
+![](https://raw.githubusercontent.com/JockDaRock/Time2Code/master/images/PWD-5555.png)
+
+Add `/tutorial?tut=https://github.com/JockDaRock/Time2Code/blob/master/QuickCodeTutorial.md` to the URL in the browser.
+
+Continue with the instructions below...
+
 ### Golang
 
 Select the Golang code language from the menu button on the bottom navbar.
