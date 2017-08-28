@@ -26,8 +26,17 @@ except Exception:
 
 @app.route('/')
 def time2code():
+    text = request.args.get('code')
+    straight_text = request.args.get('straight_text')
+    code_text = ""
 
-    return render_template('index-panel.html')
+    if text:
+        r_text = requests.get(text + "?raw=true")
+        code_text = r_text.text
+    elif straight_text:
+        code_text = straight_text
+
+    return render_template('index-panel.html', code_text=code_text)
 
 
 @app.route('/code', methods=['POST'])

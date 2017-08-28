@@ -262,7 +262,7 @@
 
 
     <div class="panel-container">
-        <div id="IDE" class="panel-left"/>
+        <div id="IDE" class="panel-left">{{ code_text }}</div>
     </div>
 
     <div class="splitter">
@@ -299,6 +299,7 @@
         <ul class="nav navbar-nav">
             <li>
                 <button id="code" onclick="termchange()" class="btn btn-success navbar-btn">RUN IT</button>
+                <button id="code" onclick="termclear()" class="btn btn-danger navbar-btn">CLEAR TERM</button>
             </li>
             <form class="navbar-form navbar-right">
                 <div class="form-group">
@@ -324,10 +325,6 @@
                     </script>
                 </div>
             </form>
-            <li>
-                <button id="code" onclick="termclear()" class="btn btn-danger navbar-btn">CLEAR TERM</button>
-            </li>
-        </ul>
       </div>
     </nav>
 
