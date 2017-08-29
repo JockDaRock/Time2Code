@@ -281,9 +281,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.7/ace.js"></script>
 <script>
     var IDE = ace.edit("IDE");
-    var code = '{{ code_text }}';
+    var code = {{ code_text }};
     IDE.setTheme("ace/theme/vibrant_ink");
-    IDE.session.setMode("ace/mode/python");
+    IDE.session.setMode("ace/mode/{{ code_lang }}");
     IDE.setValue(code, -1);
     IDE.setShowPrintMargin(false);
 

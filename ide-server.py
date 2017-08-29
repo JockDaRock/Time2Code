@@ -27,6 +27,7 @@ except Exception:
 @app.route('/')
 def time2code():
     text = request.args.get('code')
+    lang = request.args.get('lang')
     straight_text = request.args.get('straight_text')
     code_text = ""
 
@@ -35,8 +36,15 @@ def time2code():
         code_text = r_text.text
     elif straight_text:
         code_text = straight_text
+    else:
+        code_text = ""
 
-    return render_template('index-panel.html', code_text=code_text)
+    if lang:
+        code_lang = lang
+    else:
+        code_lang = "python"
+
+    return render_template('index-panel.html', code_text=code_text, code_lang=code_lang)
 
 
 @app.route('/code', methods=['POST'])
