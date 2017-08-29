@@ -262,7 +262,7 @@
 
 
     <div class="panel-container">
-        <div id="IDE" class="panel-left">{{ code_text }}</div>
+        <div id="IDE" class="panel-left" text="{{ code_text }}"/>
     </div>
 
     <div class="splitter">
@@ -338,7 +338,7 @@
         }
 
         Terminal.loadAddon('fit');
-        var term = new Terminal({cursorBlink: false, rows: 80});
+        var term = new Terminal({cursorBlink: false, rows: 12});
         term.open(document.getElementById('terminal'));
 
         function termchange() {
@@ -363,6 +363,7 @@
                                     term.writeln(termData);
                                   };
                                 writePrompt();
+                                term.scrollToBottom();
                             });
                         },
                     });
@@ -372,7 +373,7 @@
         async function termclear() {
             term.destroy();
             await sleep(100);
-            term = new Terminal({cursorBlink: true, rows: 80});
+            term = new Terminal({cursorBlink: false, rows: 12});
             term.open(document.getElementById('terminal'));
         };
     </script>
