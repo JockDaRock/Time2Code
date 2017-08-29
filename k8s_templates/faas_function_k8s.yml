@@ -1,106 +1,3 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: time2codeserver
-spec:
-  type: LoadBalancer
-  ports:
-  - name: time2codeserver-5555
-    port: 5555
-    protocol: TCP
-    targetPort: 5555
-  selector:
-    app: time2codeserver
-    component: time2codeserver
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: gateway
-  labels:
-    app: gateway
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 8080
-      protocol: TCP
-      targetPort: 8080
-  selector:
-    app: gateway
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: faas-netesd
-  labels:
-    app: faas-netesd
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 8080
-      protocol: TCP
-      targetPort: 8080
-  selector:
-    app: faas-netesd
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: prometheus
-  labels:
-    app: prometheus
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 9090
-      protocol: TCP
-      targetPort: 9090
-  selector:
-    app: prometheus
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: alertmanager
-  labels:
-    app: alertmanager
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 9093
-      protocol: TCP
-      targetPort: 9093
-  selector:
-    app: alertmanager
-
-
-
----
-apiVersion: apps/v1beta1 # for versions before 1.6.0 use extensions/v1beta1
-kind: Deployment
-metadata:
-  name: alertmanager
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: alertmanager
-    spec:
-      containers:
-      - name: alertmanager
-        image: functions/alertmanager:latest-k8s
-        imagePullPolicy: Always
-        imagePullPolicy: Always
-        command: ["/bin/alertmanager","-config.file=/alertmanager.yml", "-storage.path=/alertmanager"]
-        ports:
-        - containerPort: 9003
-          protocol: TCP
-      restartPolicy: Always
-      volumes: null
-
----
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -139,49 +36,8 @@ spec:
         image: jockdarock/time2csharp:latest
         imagePullPolicy: Always
         name: csharp-experimental
-  nodename: aci-connector
-
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: gateway
-spec:
-  replicas: 1
-  rollbackTo:
-    revision: 0
-  selector:
-    matchLabels:
-      app: time2code
-      component: gateway
-  strategy:
-    rollingUpdate:
-      maxSurge: 10
-      maxUnavailable: 1
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: time2code
-        component: gateway
-    spec:
-      containers:
-      - env:
-        - name: dnsrr
-          value: "true"
-        - name: read_timeout
-          value: "60"
-        - name: write_timeout
-          value: "60"
-        - name: functions_provider_url
-          value: "http://faas-netesd.default:8080/"
-        image: functions/gateway:0.5.8-alpha
-        imagePullPolicy: Always
-        name: gateway
-        ports:
-        - containerPort: 8080
-          protocol: TCP
-      restartPolicy: Always
+      nodeSelector:
+        dedicated: aci-connector
 
 ---
 apiVersion: extensions/v1beta1
@@ -222,7 +78,8 @@ spec:
         image: jockdarock/time2go:latest
         imagePullPolicy: Always
         name: golang
-      nodename: aci-connector
+      nodeSelector:
+        dedicated: aci-connector
 
 ---
 apiVersion: extensions/v1beta1
@@ -263,7 +120,8 @@ spec:
         image: jockdarock/time2nodejs:latest
         imagePullPolicy: Always
         name: nodejs
-      nodename: aci-connector
+      nodeSelector:
+        dedicated: aci-connector
 
 ---
 apiVersion: extensions/v1beta1
@@ -306,29 +164,8 @@ spec:
         name: powershell
         volumeMounts: null
       volumes: null
-      nodename: aci-connector
-
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: prometheus
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: prometheus
-    spec:
-      containers:
-      - name: prometheus
-        image: functions/prometheus:latest-k8s
-        imagePullPolicy: Always
-        command: ["prometheus","-config.file=/etc/prometheus/prometheus.yml", "-storage.local.path=/prometheus", "-storage.local.memory-chunks=10000", "--alertmanager.url=http://alertmanager.default:9093"]
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 9090
-          protocol: TCP
+      nodeSelector:
+        dedicated: aci-connector
 
 ---
 apiVersion: extensions/v1beta1
@@ -371,42 +208,5 @@ spec:
         name: python
         volumeMounts: null
       volumes: null
-      nodename: aci-connector
-
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: time2codeserver
-spec:
-  replicas: 3
-  rollbackTo:
-    revision: 0
-  selector:
-    matchLabels:
-      app: time2code
-      component: time2codeserver
-  strategy:
-    rollingUpdate:
-      maxSurge: 10
-      maxUnavailable: 2
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: time2code
-        component: time2codeserver
-    spec:
-      containers:
-      - image: jockdarock/time2codeserver:latest
-        name: time2codeserver
-        imagePullPolicy: Always
-        env:
-        - name: time2code_provider_url
-          value: "http://time2codeserver.default:5555"
-        ports:
-        - containerPort: 5555
-          protocol: TCP
-        volumeMounts: null
-      restartPolicy: Always
-      volumes: null
+      nodeSelector:
+        dedicated: aci-connector
