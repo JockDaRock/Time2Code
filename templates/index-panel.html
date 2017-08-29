@@ -127,7 +127,7 @@
     .terminal {
         font-size: 15px
     }
-    .panel-left {
+    .panel-left, IDE {
         flex: 0 0 auto;
         width: 50%;
         min-width: 150px
@@ -151,7 +151,7 @@
         flex-direction: column;
         flex: 1 1 auto;
         width: 100%;
-        background: #24323a
+        background-color: #000000
     }
     .panel-right>div {
         flex: 1 1 auto;
@@ -262,7 +262,7 @@
 
 
     <div class="panel-container">
-        <div id="IDE" class="panel-left" text="{{ code_text }}"/>
+        <div class="panel-left" id="IDE"/>
     </div>
 
     <div class="splitter">
@@ -281,8 +281,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.7/ace.js"></script>
 <script>
     var IDE = ace.edit("IDE");
+    var code = '{{ code_text }}';
     IDE.setTheme("ace/theme/vibrant_ink");
     IDE.session.setMode("ace/mode/python");
+    IDE.setValue(code, -1);
     IDE.setShowPrintMargin(false);
 
     $(".panel-left").resizable({
@@ -338,7 +340,7 @@
         }
 
         Terminal.loadAddon('fit');
-        var term = new Terminal({cursorBlink: false, rows: 80});
+        var term = new Terminal({cursorBlink: false, rows: 40});
         term.open(document.getElementById('terminal'));
 
         function termchange() {
@@ -373,7 +375,7 @@
         async function termclear() {
             term.destroy();
             await sleep(100);
-            term = new Terminal({cursorBlink: false, rows: 80});
+            term = new Terminal({cursorBlink: false, rows: 40});
             term.open(document.getElementById('terminal'));
         };
     </script>
