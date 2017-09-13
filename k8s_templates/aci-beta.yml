@@ -139,7 +139,7 @@ spec:
         image: jockdarock/time2csharp:latest
         imagePullPolicy: Always
         name: csharp-experimental
-  nodename: aci-connector
+  nodeName: aci-connector
 
 ---
 apiVersion: extensions/v1beta1

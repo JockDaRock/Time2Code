@@ -1,8 +1,12 @@
 provider:
   name: faas
-  gateway: http://localhost:31112
+  gateway: http://localhost:8080
 
 functions:
+  time2code:
+    fprocess: python handler.py
+    image: jockdarock/cgi_t2c:latest
+
   golang:
     fprocess: python3 time2go.py
     image: jockdarock/time2go:latest

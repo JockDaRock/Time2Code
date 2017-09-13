@@ -1,0 +1,166 @@
+version: "3"
+services:
+# Setup FaaS Framework First
+# Core API services for FaaS are pinned, HA is provided for functions.
+    gateway:
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+        ports:
+            - 8080:8080
+        image: jockdarock/faasgateway:latest-dev
+        networks:
+            - functions
+        environment:
+            dnsrr: "true"  # Temporarily use dnsrr in place of VIP while issue persists on PWD
+            read_timeout: "60"
+            write_timeout: "60"
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+    prometheus:
+        image: functions/prometheus:latest  # autobuild from Dockerfile in repo.
+        command: "-config.file=/etc/prometheus/prometheus.yml -storage.local.path=/prometheus -storage.local.memory-chunks=10000 --alertmanager.url=http://alertmanager:9093"
+        ports:
+            - 9090:9090
+        depends_on:
+            - gateway
+            - alertmanager
+        environment:
+            no_proxy: "gateway"
+        networks:
+            - functions
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+    alertmanager:
+        image: functions/alertmanager:latest    # autobuild from Dockerfile in repo.
+        environment:
+            no_proxy: "gateway"
+        command:
+            - '-config.file=/alertmanager.yml'
+        networks:
+            - functions
+        ports:
+            - 9093:9093
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+    # IDE and Code execution functions on OpenFaaS
+    # IDE as a function
+    time2code:
+        image: jockdarock/cgi_t2c:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python handler.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+            read_timeout: "60"
+            write_timeout: "60"
+
+    # Python Code Execution
+    python:
+        image: jockdarock/time2py:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python3 time2py.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+            read_timeout: "60"
+            write_timeout: "60"
+
+    # Golang Code Execution
+    golang:
+        image: jockdarock/time2go:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python3 time2go.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+            read_timeout: "60"
+            write_timeout: "60"
+
+    # Powershell Code Execution
+    powershell:
+        image: jockdarock/time2powershell:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python3 time2powershell.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+            read_timeout: "60"
+            write_timeout: "60"
+
+    # DotNet / C# Code Execution
+    csharp-experimental:
+        image: jockdarock/time2csharp:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python3 time2CSharp.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+            read_timeout: "60"
+            write_timeout: "60"
+
+    # NodeJS Code Execution
+    nodejs:
+        image: jockdarock/time2nodejs:latest
+        labels:
+            function: "true"
+        depends_on:
+            - gateway
+        networks:
+            - functions
+        environment:
+            fprocess: "python3 time2nodejs.py"
+            no_proxy: "gateway"
+            https_proxy: $https_proxy
+            read_timeout: "60"
+            write_timeout: "60"
+
+    # Time2Code Code Editor / Flask Web Server
+    time2codeserver:
+      depends_on:
+            - gateway
+      build:
+        context: .
+        dockerfile: Dockerfile.nofaas
+      deploy:
+        replicas: 2
+      image: jockdarock/time2codeserver:latest
+      networks:
+        - functions
+      ports:
+        - "5555:5555"
+
+networks:
+    functions:
+        driver: overlay
+

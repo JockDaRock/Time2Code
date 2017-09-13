@@ -1,195 +1,32 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: csharp-experimental
+  name: python
+  namespace: default
 spec:
-  replicas: 0
-  rollbackTo:
-    revision: 0
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
   selector:
-    matchLabels:
-      app: time2code
-      component: csharp-experimental
-  strategy:
-    rollingUpdate:
-      maxSurge: 1000
-      maxUnavailable: 0
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: time2code
-        component: csharp-experimental
-    spec:
-      containers:
-      - env:
-        - name: fprocess
-          value: python3 time2CSharp.py
-        - name: https_proxy
-          value: $https_proxy
-        - name: no_proxy
-          value: gateway
-        - name: read_timeout
-          value: "60"
-        - name: write_timeout
-          value: "60"
-        image: jockdarock/time2csharp:latest
-        imagePullPolicy: Always
-        name: csharp-experimental
-      nodeSelector:
-        dedicated: aci-connector
-
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: golang
-spec:
-  replicas: 1
-  rollbackTo:
-    revision: 0
-  selector:
-    matchLabels:
-      app: time2code
-      component: golang
-  strategy:
-    rollingUpdate:
-      maxSurge: 1000
-      maxUnavailable: 1
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: time2code
-        component: golang
-    spec:
-      containers:
-      - env:
-        - name: fprocess
-          value: python3 time2go.py
-        - name: https_proxy
-          value: $https_proxy
-        - name: no_proxy
-          value: gateway
-        - name: read_timeout
-          value: "60"
-        - name: write_timeout
-          value: "60"
-        image: jockdarock/time2go:latest
-        imagePullPolicy: Always
-        name: golang
-      nodeSelector:
-        dedicated: aci-connector
-
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: nodejs
-spec:
-  replicas: 0
-  rollbackTo:
-    revision: 0
-  selector:
-    matchLabels:
-      app: time2code
-      component: nodejs
-  strategy:
-    rollingUpdate:
-      maxSurge: 1000
-      maxUnavailable: 0
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: time2code
-        component: nodejs
-    spec:
-      containers:
-      - env:
-        - name: fprocess
-          value: python3 time2nodejs.py
-        - name: https_proxy
-          value: $https_proxy
-        - name: no_proxy
-          value: gateway
-        - name: read_timeout
-          value: "60"
-        - name: write_timeout
-          value: "60"
-        image: jockdarock/time2nodejs:latest
-        imagePullPolicy: Always
-        name: nodejs
-      nodeSelector:
-        dedicated: aci-connector
-
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: powershell
-spec:
-  replicas: 0
-  rollbackTo:
-    revision: 0
-  selector:
-    matchLabels:
-      app: time2code
-      component: powershell
-  strategy:
-    rollingUpdate:
-      maxSurge: 1000
-      maxUnavailable: 0
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: time2code
-        component: powershell
-    spec:
-      containers:
-      - env:
-        - name: fprocess
-          value: python3 time2powershell.py
-        - name: https_proxy
-          value: $https_proxy
-        - name: no_proxy
-          value: gateway
-        - name: read_timeout
-          value: "60"
-        - name: write_timeout
-          value: "60"
-        image: jockdarock/time2powershell:latest
-        imagePullPolicy: Always
-        name: powershell
-        volumeMounts: null
-      volumes: null
-      nodeSelector:
-        dedicated: aci-connector
-
+    faas_function: python
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: python
 spec:
-  replicas: 0
+  replicas: 1
   rollbackTo:
     revision: 0
   selector:
     matchLabels:
-      app: time2code
-      component: python
-  strategy:
-    rollingUpdate:
-      maxSurge: 1000
-      maxUnavailable: 0
-    type: RollingUpdate
+      faas_function: python
   template:
     metadata:
+      name: python
       labels:
-        app: time2code
-        component: python
+        faas_function: python
     spec:
       containers:
       - env:
@@ -206,7 +43,4 @@ spec:
         image: jockdarock/time2py:latest
         imagePullPolicy: Always
         name: python
-        volumeMounts: null
-      volumes: null
-      nodeSelector:
-        dedicated: aci-connector
+      nodeName: aci-connector
