@@ -5,7 +5,7 @@ RUN apk add -Uuv --no-cache python3 \
     && apk add ca-certificates && pip3 install --no-cache-dir --upgrade pip setuptools wheel \
     && pip3 install requests flask markdown
 
-ADD https://github.com/alexellis/faas/releases/download/0.5.6-alpha/fwatchdog /usr/bin
+ADD https://github.com/alexellis/faas/releases/download/0.5.8-alpha/fwatchdog /usr/bin
 
 RUN chmod +x /usr/bin/fwatchdog
 
