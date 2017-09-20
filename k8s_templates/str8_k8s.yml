@@ -144,7 +144,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: alexellis2/gateway:k8s-monitoring-dev
+        image: functions/gateway:latest
         imagePullPolicy: Always
         env:
         - name: functions_provider_url
