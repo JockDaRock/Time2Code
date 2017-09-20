@@ -125,7 +125,7 @@ spec:
     spec:
       containers:
       - name: faas-netesd
-        image: alexellis2/faas-netes:scaling
+        image: faas-netesd:0.3-alpha
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
