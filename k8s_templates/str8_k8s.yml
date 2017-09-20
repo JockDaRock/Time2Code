@@ -106,7 +106,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: time2code_provider_url
-          value: "http://time2codeserver.default:5555"
+          value: "http://time2codeserver.default.svc.cluster.local:5555"
         ports:
         - containerPort: 5555
           protocol: TCP
@@ -148,7 +148,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: functions_provider_url
-          value: "http://faas-netesd.default:8080/"
+          value: "http://faas-netesd.default.svc.cluster.local:8080/"
         ports:
         - containerPort: 8080
           protocol: TCP
