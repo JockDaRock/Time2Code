@@ -21,7 +21,8 @@ except Exception:
     p2 = subprocess.Popen(["awk", "/default/ { print $3 }"], stdin=p1.stdout, stdout=subprocess.PIPE)
     faas = (p2.stdout).read().decode("utf-8").replace("\n", "")
     faas_port = 8080
-    swarm_tag = "time2code_"
+    # swarm_tag = "time2code_"
+    swarm_tag = ""
 
 
 @app.route('/')
