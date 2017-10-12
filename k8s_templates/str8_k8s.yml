@@ -106,7 +106,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: time2code_provider_url
-          value: "http://time2codeserver.default:5555"
+          value: "http://time2codeserver.default.svc.cluster.local:5555"
         ports:
         - containerPort: 5555
           protocol: TCP
@@ -125,7 +125,7 @@ spec:
     spec:
       containers:
       - name: faas-netesd
-        image: alexellis2/faas-netes:scaling
+        image: functions/faas-netesd:0.3-alpha3
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -144,11 +144,11 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: alexellis2/gateway:k8s-monitoring-dev
+        image: functions/gateway:0.6.6-beta
         imagePullPolicy: Always
         env:
         - name: functions_provider_url
-          value: "http://faas-netesd.default:8080/"
+          value: "http://faas-netesd.default.svc.cluster.local:8080/"
         ports:
         - containerPort: 8080
           protocol: TCP
