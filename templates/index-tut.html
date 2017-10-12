@@ -223,18 +223,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.7/ace.js"></script>
 <script>
     var IDE = ace.edit("IDE");
+
     IDE.setTheme("ace/theme/vibrant_ink");
     IDE.session.setMode("ace/mode/python");
+
     IDE.setShowPrintMargin(false);
 
     $(".panel-left").resizable({
         handleSelector: ".splitter",
-        resizeHeight: false
-    });
-
-    $(".panel-top").resizable({
-        handleSelector: ".splitter-horizontal",
-        resizeWidth: false
+        resizeHeight: false,
     });
 </script>
 
@@ -249,17 +246,26 @@
             <form class="navbar-form navbar-right">
                 <div class="form-group">
                   <select id="mode" class="form-control" style="float:right;">
-                    <option value="python">python</option>
-                    <option value="golang">golang</option>
-                    <option value="powershell">powershell</option>
-                    <option value="javascript">nodejs</option>
-                    <option value="csharp">csharp-experimental</option>
+                    <option label="python" value="python3">python3</option>
+                    <option label="golang" value="golang">golang</option>
+                    <option label="javascript" value="nodejs">nodejs</option>
+                    <option label="fortran" value="fortran">fortran</option>
+                    <option label="ruby" value="ruby">ruby</option>
+                    <option label="powershell" value="powershell">powershell</option>
+                    <option label="csharp" value="csharp-experimental">csharp-experimental</option>
                   </select>
                     <script>
+                        document.getElementById("mode").value = "{{ code_lang }}";
+                        var modeElement = document.getElementById("mode");
+                        mode = modeElement.options[modeElement.selectedIndex].label;
+                        var IDE = ace.edit("IDE");
+                        IDE.session.setMode("ace/mode/" + mode);
+                        var code = $('<textarea />').html(`{{ code_text }}`).text();
+                        IDE.setValue(code, -1);
                         document.addEventListener("DOMContentLoaded", function(event){
                             $("#mode").change(function() {
                                 var modeElement = document.getElementById("mode");
-                                mode = modeElement.options[modeElement.selectedIndex].value;
+                                mode = modeElement.options[modeElement.selectedIndex].label;
                                 console.log(mode);
                                 var IDE = ace.edit("IDE");
                                 IDE.setTheme("ace/theme/vibrant_ink");
@@ -267,6 +273,25 @@
                                 IDE.setOption("showPrintMargin", false);
                             });
                         });
+
+                        const span = document.querySelectorAll("pre");
+
+                        span.forEach(function(elem) {
+                            elem.onclick = function() {
+                                document.execCommand("copy");
+                            }
+                            elem.addEventListener("copy", function(event) {
+                                event.preventDefault();
+                                if (event.clipboardData) {
+                                    event.clipboardData.setData("text/plain", elem.textContent);
+                                    console.log(event.clipboardData.getData("text"));
+                                    var IDE = ace.edit("IDE");
+                                    var code = $('<textarea />').html(event.clipboardData.getData("text")).text();
+                                    IDE.setValue(code, -1);
+                                }
+                            });
+                        });
+
                     </script>
                 </div>
             </form>
