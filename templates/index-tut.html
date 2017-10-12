@@ -274,23 +274,7 @@
                             });
                         });
 
-                        const span = document.querySelectorAll("pre");
 
-                        span.forEach(function(elem) {
-                            elem.onclick = function() {
-                                document.execCommand("copy");
-                            }
-                            elem.addEventListener("copy", function(event) {
-                                event.preventDefault();
-                                if (event.clipboardData) {
-                                    event.clipboardData.setData("text/plain", elem.textContent);
-                                    console.log(event.clipboardData.getData("text"));
-                                    var IDE = ace.edit("IDE");
-                                    var code = $('<textarea />').html(event.clipboardData.getData("text")).text();
-                                    IDE.setValue(code, -1);
-                                }
-                            });
-                        });
 
                     </script>
                 </div>
@@ -347,6 +331,16 @@
             term = new Terminal({cursorBlink: false, rows: 12});
             term.open(document.getElementById('terminal'));
         };
+
+        $("pre").each(function() {
+            $(this).click(function() {
+                console.log($(this).text());
+                document.execCommand("copy");
+                var IDE = ace.edit("IDE");
+                var code = $('<textarea />').html($(this).text()).text();
+                IDE.setValue(code, -1);
+            })
+        });
     </script>
 
 
