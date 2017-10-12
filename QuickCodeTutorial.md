@@ -12,7 +12,7 @@ Select the Golang code language from the menu button on the bottom navbar.
 
 Then enter the Code below in the **IDE** on the **right**.
 
-```Golang
+```golang
 package main
 
 import (
@@ -47,7 +47,7 @@ Click the **CLEAR TERM** button once you are done and Repeat the same steps as a
 
 ### NodeJS
 
-```NodeJS
+```node
 var request = require("request");
 
 var options = { method: 'GET',
@@ -64,7 +64,7 @@ request(options, function (error, response, body) {
 ### Python
 
 
-```Python
+```python
 import requests
 
 url = "http://api.open-notify.org/iss-now.json"
