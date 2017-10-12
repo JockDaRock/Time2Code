@@ -47,7 +47,7 @@ Click the **CLEAR TERM** button once you are done and Repeat the same steps as a
 
 ### NodeJS
 
-```nodejs
+```node
 var request = require("request");
 
 var options = { method: 'GET',
