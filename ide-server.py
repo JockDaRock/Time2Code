@@ -96,7 +96,7 @@ def tutorial():
     if lang:
         code_lang = lang
     else:
-        code_lang = "python3"
+        code_lang = "python"
 
     content = Markup(markdown.markdown(mark, extensions=['pymdownx.github', 'pymdownx.highlight']))
     return render_template('index-tut.html', markdown=content, code_text=code_text, code_lang=code_lang)
