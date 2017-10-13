@@ -246,7 +246,7 @@
             <form class="navbar-form navbar-right">
                 <div class="form-group">
                   <select id="mode" class="form-control" style="float:right;">
-                    <option label="python" value="python3">python3</option>
+                    <option label="python" value="python">python3</option>
                     <option label="golang" value="golang">golang</option>
                     <option label="javascript" value="nodejs">nodejs</option>
                     <option label="fortran" value="fortran">fortran</option>
@@ -298,7 +298,7 @@
 
         function termchange() {
                     var getmode = document.getElementById("mode");
-                    mode = getmode.options[getmode.selectedIndex].text;
+                    mode = getmode.options[getmode.selectedIndex].value;
                     var IDE = ace.edit("IDE");
                     var code = IDE.getValue();
                     var url = "http://" + location.host + "/code?lang=" + mode;
