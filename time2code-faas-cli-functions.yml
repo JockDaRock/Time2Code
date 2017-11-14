@@ -7,7 +7,7 @@ functions:
     fprocess: python3 time2go.py
     image: jockdarock/time2go:latest
 
-  python:
+  python3:
     fprocess: python3 time2py.py
     image: jockdarock/time2py:latest
 

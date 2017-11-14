@@ -246,7 +246,7 @@
             <form class="navbar-form navbar-right">
                 <div class="form-group">
                   <select id="mode" class="form-control" style="float:right;">
-                    <option label="python" value="python">python3</option>
+                    <option label="python3" value="python">python3</option>
                     <option label="golang" value="golang">golang</option>
                     <option label="javascript" value="nodejs">nodejs</option>
                     <option label="fortran" value="fortran">fortran</option>
@@ -296,6 +296,13 @@
         var term = new Terminal({cursorBlink: false, rows: 12});
         term.open(document.getElementById('terminal'));
 
+        async function termclear() {
+            term.destroy();
+            await sleep(100);
+            term = new Terminal({cursorBlink: false, rows: 12});
+            term.open(document.getElementById('terminal'));
+        };
+
         function termchange() {
                     var getmode = document.getElementById("mode");
                     mode = getmode.options[getmode.selectedIndex].value;
@@ -303,6 +310,7 @@
                     var code = IDE.getValue();
                     var url = "http://" + location.host + "/code?lang=" + mode;
                     console.log(url)
+                    termclear()
                     $.ajax({
                         url: url,
                         type: 'post',
@@ -325,12 +333,6 @@
 
                 };
 
-        async function termclear() {
-            term.destroy();
-            await sleep(100);
-            term = new Terminal({cursorBlink: false, rows: 12});
-            term.open(document.getElementById('terminal'));
-        };
 
         $("pre").each(function() {
             $(this).click(function() {
