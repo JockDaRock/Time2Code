@@ -353,10 +353,11 @@
 
         function termchange() {
                     var getmode = document.getElementById("mode");
-                    mode = getmode.options[getmode.selectedIndex].value;
+                    var mode = getmode.options[getmode.selectedIndex].label;
+                    var mode_code = getmode.options[getmode.selectedIndex].value;
                     var IDE = ace.edit("IDE");
                     var code = IDE.getValue();
-                    var url = "http://" + location.host + "/code?lang=" + mode;
+                    var url = "http://" + location.host + "/code?lang=" + mode_code;
                     console.log(url)
                     $.ajax({
                         url: url,
