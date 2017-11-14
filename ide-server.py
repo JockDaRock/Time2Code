@@ -42,7 +42,7 @@ def time2code():
     if lang:
         code_lang = lang
     else:
-        code_lang = "python"
+        code_lang = "python3"
 
     return render_template('index-panel.html', code_text=code_text, code_lang=code_lang)
 
@@ -96,7 +96,7 @@ def tutorial():
     if lang:
         code_lang = lang
     else:
-        code_lang = "python"
+        code_lang = "python3"
 
     content = Markup(markdown.markdown(mark, extensions=['pymdownx.github', 'pymdownx.highlight']))
     return render_template('index-tut.html', markdown=content, code_text=code_text, code_lang=code_lang)
