@@ -36,6 +36,8 @@ If you are on your laptop navigate to http://127.0.0.1:5555 and start coding.
 
 ### Play-with-Docker
 
+> Note: Play-with-Docker now requires you to have a Docker Hub account to use it.  It is free to signup, if you don't have one I would suggest to get an account on Docker Hub.
+
 [![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/JockDaRock/Time2Code/master/time2code-swarm-deploy.yml&stack_name=time2code)
 
 Click the **Try in PWD** and get started with Time2Code quickly.  Once your PWD instance is up and running click on the 5555 tag and start coding.
