@@ -125,7 +125,7 @@ spec:
     spec:
       containers:
       - name: faas-netesd
-        image: functions/faas-netesd:0.3.1c
+        image: functions/faas-netesd:0.3.4
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -144,7 +144,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: functions/gateway:0.6.6-beta
+        image: functions/gateway:0.6.13
         imagePullPolicy: Always
         env:
         - name: functions_provider_url
