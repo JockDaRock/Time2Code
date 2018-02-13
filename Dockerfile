@@ -15,7 +15,7 @@ WORKDIR /root/
 
 # COPY ide.py .
 COPY ide-server.py .
-COPY handler.py
+COPY handler.py .
 COPY templates ./templates
 
 ENV fprocess="python3 handler.py"
