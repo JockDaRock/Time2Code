@@ -13,10 +13,12 @@ RUN chmod +x /usr/bin/fwatchdog
 
 WORKDIR /root/
 
-COPY ide.py .
+# COPY ide.py .
+COPY ide-server.py .
+COPY handler.py
 COPY templates ./templates
 
-ENV fprocess="python3 ide.py"
+ENV fprocess="python3 handler.py"
 ENV cgi_headers="true"
 ENV cgi_body="true"
 ENV mode="serializing"
