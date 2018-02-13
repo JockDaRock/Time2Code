@@ -21,9 +21,8 @@ COPY templates ./templates
 ENV fprocess="python3 handler.py"
 ENV cgi_headers="true"
 ENV cgi_body="true"
-ENV mode="http"
+ENV mode="serializing"
 ENV content_type="text/html"
-ENV upstream_url="http://127.0.0.1:5000"
 
 HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
 
