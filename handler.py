@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from wsgiref.handlers import CGIHandler
 import os
-from ide-server import app
+from ide_server import app
 
 query_params = os.getenv("Http_Query", default="")
 whole_path = os.getenv("Http_Path", default="/ip")

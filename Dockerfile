@@ -14,7 +14,7 @@ RUN chmod +x /usr/bin/fwatchdog
 WORKDIR /root/
 
 # COPY ide.py .
-COPY ide-server.py .
+COPY ide_server.py .
 COPY handler.py .
 COPY templates ./templates
 
