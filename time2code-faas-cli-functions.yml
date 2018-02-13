@@ -4,7 +4,7 @@ provider:
 
 functions:
   time2code:
-    fprocess: python3 ide.py
+    fprocess: python3 handler.py
     image: jockdarock/time2code:master
   golang:
     fprocess: python3 time2go.py
