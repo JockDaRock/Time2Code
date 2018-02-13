@@ -9,20 +9,6 @@ import socket
 
 app = Flask(__name__)
 
-try:
-    # Looking for the IP address on the K8s
-    faas = "faas-netesd.default"
-    ip = socket.getaddrinfo(faas, 0, 0, 0, 0)
-    faas_port = 8080
-    swarm_tag = ""
-except Exception:
-    # finds Docker swarm host IP upon no K8s
-    p1 = subprocess.Popen(["/sbin/ip", "route"], stdout=subprocess.PIPE)
-    p2 = subprocess.Popen(["awk", "/default/ { print $3 }"], stdin=p1.stdout, stdout=subprocess.PIPE)
-    faas = (p2.stdout).read().decode("utf-8").replace("\n", "")
-    faas_port = 8080
-    swarm_tag = "time2code_"
-
 
 @app.route('/')
 def time2code():
@@ -44,28 +30,7 @@ def time2code():
     else:
         code_lang = "python3"
 
-    return render_template('index-panel.html', code_text=code_text, code_lang=code_lang)
-
-
-@app.route('/code', methods=['POST'])
-def code():
-    if request.method == 'POST':
-        data = request.data
-        lang = request.args.get('lang')
-        hosturl = urlparse(request.url)
-        host = hosturl.hostname
-        # url = "http://%s:%s/function/time2py" % host
-        url = "http://%s:%s/function/%s%s" % (faas, faas_port, swarm_tag, lang)
-        # print(url)
-        headers = {"Content-Type": "text/plain"}
-
-        code_exec = requests.post(url, data=data, headers=headers)
-
-        resp = code_exec.text
-
-        # print(resp)
-
-        return resp
+    return render_template('index.html', code_text=code_text, code_lang=code_lang)
 
 
 @app.route('/tutorial')
@@ -99,7 +64,7 @@ def tutorial():
         code_lang = "python3"
 
     content = Markup(markdown.markdown(mark, extensions=['pymdownx.github', 'pymdownx.highlight']))
-    return render_template('index-tut.html', markdown=content, code_text=code_text, code_lang=code_lang)
+    return render_template('index-tutorial.html', markdown=content, code_text=code_text, code_lang=code_lang)
 
 
 if __name__ == '__main__':
