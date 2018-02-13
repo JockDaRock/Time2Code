@@ -3,6 +3,9 @@ provider:
   gateway: http://localhost:31112
 
 functions:
+  time2code:
+    fprocess: python3 ide.py
+    image: jockdarock/time2code:master
   golang:
     fprocess: python3 time2go.py
     image: jockdarock/time2go:latest
