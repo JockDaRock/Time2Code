@@ -28,6 +28,21 @@ class ProxyFix(object):
         environ['Http_X_Forwarded_For'] = os.getenv("Http_X_Forwarded_For", "127.0.0.1")
         return self.app(environ, start_response)
 
+
+class HeaderRewriterFix(object):
+
+    def __init__(self, app, remove_headers=None, add_headers=None):
+        self.app = app
+        self.remove_headers = set(x.lower() for x in (remove_headers or ()))
+        self.add_headers = list(add_headers or ())
+
+    def __call__(self, environ, start_response):
+        def rewriting_start_response(status, headers, exc_info=None):
+            new_headers = []
+            return start_response(status, new_headers, exc_info)
+        return self.app(environ, rewriting_start_response)
+
 if __name__ == '__main__':
     app.wsgi_app = ProxyFix(app.wsgi_app)
+    app.wsgi_app = HeaderRewriterFix(app.wsgi_app)
     CGIHandler().run(app)
