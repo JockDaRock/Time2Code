@@ -19,8 +19,8 @@ COPY handler.py .
 COPY templates ./templates
 
 ENV fprocess="python3 handler.py"
-ENV cgi_headers=true
-ENV cgi_body=true
+ENV cgi_headers="true"
+ENV cgi_body="true"
 ENV mode="serializing"
 ENV content_type="text/html"
 
