@@ -58,7 +58,7 @@ Type the following snippets will get minikube started and faas-netes loaded into
 
 Then run the following bash script to load FaaS and Time2Code...
 
-`$ bash ./minikube.sh'
+`$ bash ./minikube.sh`
 
 Once the script is complete it will provide you with the url, like this http://192.168.99.100:31114/, to reach the Time2Code web editor.  **BEFORE** you start using it, you will need to deploy the code execution functions after the FaaS services have started.  It might take a minute or two for all of the necessary Kube pods to be Running.  Keep checking the pods with `kubectl get pods`.  
 
