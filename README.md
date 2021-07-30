@@ -12,7 +12,7 @@ The goal is to make deploying your own web based code editor easier and more fun
 
 * Function handling and code execution are being handled by Python processes.  Python handles the STDIN of all of the function requests and then passes it to the desired language for interpretation and execution or compilation and execution.
 
-* Web site is being driven by the [Flask](http://flask.pocoo.org/) Framework as a Swarm service.
+* Web site is being driven by the [Flask](http://flask.pocoo.org/) Framework
 
 * Code editor is built from [Ace Editor](https://ace.c9.io/) project.
 
@@ -34,19 +34,9 @@ $ docker swarm init --advertise-addr eth0 && \
 
 If you are on your laptop navigate to http://127.0.0.1:5555 and start coding.
 
-### Play-with-Docker
+### Kubernetes - minikube
 
-> Note: Play-with-Docker now requires you to have a Docker Hub account to use it.  It is free to signup, if you don't have one I would suggest to get an account on Docker Hub.
-
-[![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/JockDaRock/Time2Code/master/time2code-swarm-deploy.yml&stack_name=time2code)
-
-Click the **Try in PWD** and get started with Time2Code quickly.  Once your PWD instance is up and running click on the 5555 tag and start coding.
-
-![](/images/PWD-5555.png)
-
-
-
-### Kubernetes (minikube)
+> Note: Revisiting this and revamping kubernetes deployment...
 
 You will need to have [minikube installed](https://kubernetes.io/docs/tasks/tools/install-minikube/) before you begin.
 
@@ -74,6 +64,8 @@ Once the kube pods for the code execution are running you can get to coding :)!
 
 [Time2Code: Functions as Service and Code as a Function](https://medium.com/@JockDaRock/time2code-functions-as-service-and-code-as-a-function-3d9125fc49fb)
 
+More to come...
+
 
 
 ## Coding Languages Currently Supported
@@ -86,8 +78,9 @@ Once the kube pods for the code execution are running you can get to coding :)!
 * [Python](https://github.com/JockDaRock/Time2Py)
 * [Golang](https://github.com/JockDaRock/Time2Go)
 * [NodeJS](https://github.com/JockDaRock/Time2NodeJS)
-* [Powershell](https://github.com/JockDaRock/Time2Powershell)
-* [C#](https://github.com/JockDaRock/Time2CSharp)
+* [Powershell](https://github.com/JockDaRock/Time2Powershell) (WIP)
+* [C#](https://github.com/JockDaRock/Time2CSharp) (WIP)
+* Fortran
 
 
 ## Roadmap and Contributing
